@@ -1,0 +1,599 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ward/utils/language_constant.dart';
+import 'package:ward/utils/theme.dart';
+import 'package:ward/view/pages/cart_page/cart_view_model.dart';
+import 'package:ward/view/widget/cart_widget/cart_widget.dart';
+import '../../../utils/const.dart';
+import '../../widget/cart_widget/cart_bouq_widget.dart';
+import '../../widget/cart_widget/payment/delivery_container_widget.dart';
+import '../../widget/cart_widget/reusable_widget.dart';
+import '../../widget/checkout_widget/text_field.dart';
+import '../../widget/text_utils.dart';
+import '../Success_page/successs_page.dart';
+
+class CartBouquetPage extends StatefulWidget {
+  final String currentColor;
+  final String message;
+  const CartBouquetPage(
+      {Key? key, required this.currentColor, required this.message})
+      : super(key: key);
+
+  @override
+  State<CartBouquetPage> createState() => _CartBouquetPageState();
+}
+
+class _CartBouquetPageState extends State<CartBouquetPage> {
+  final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.microtask(() => context.read<CartViewModel>().getAllCartProducts());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final cart = Provider.of<CartViewModel>(context);
+    final firebaseUser = FirebaseAuth.instance.currentUser;
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: mainColor,
+        elevation: 0.0,
+      ),
+      body: cart.bouquetList.isEmpty
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  "assets/images/Empty-Cart.jpg",
+                ),
+              ],
+            )
+          : Column(
+              children: [
+                Theme(
+                  data: ThemeData(
+                    canvasColor: Colors.white,
+                    colorScheme: Theme.of(context).colorScheme.copyWith(
+                          primary: mainColor,
+                          background: Colors.red,
+                          secondary: mainColor,
+                        ),
+                  ),
+                  child: Expanded(
+                    child: Stepper(
+                      elevation: 0.0,
+                      type: StepperType.horizontal,
+                      physics: const ScrollPhysics(),
+                      currentStep: cart.currentStep_,
+                      onStepTapped: (step) => tapped(step),
+                      onStepContinue: () {
+                        setState(() => cart.currentStep_ += 1);
+                      },
+                      onStepCancel: () {
+                        setState(() => cart.currentStep_ -= 1);
+                      },
+                      controlsBuilder: (context, ControlsDetails details) {
+                        final isLastStep = cart.currentStep_ == 2;
+                        return Container(
+                          margin: const EdgeInsets.only(top: 50),
+                          child: Row(
+                            children: [
+                              isLastStep
+                                  ? const SizedBox()
+                                  : cart.bouquetList.isEmpty
+                                      ? SizedBox()
+                                      : cart.currentStep_ != 1
+                                          ? ElevatedButton(
+                                              onPressed: details.onStepContinue,
+                                              child: const Text("NEXT"),
+                                            )
+                                          : ElevatedButton(
+                                              onPressed: details.onStepContinue,
+                                              child: const Text("NEXT"),
+                                            ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              if (cart.currentStep_ != 0)
+                                ElevatedButton(
+                                  onPressed: details.onStepCancel,
+                                  child: const Text("BACK"),
+                                ),
+                            ],
+                          ),
+                        );
+                      },
+                      steps: <Step>[
+                        Step(
+                          title: Text(translation(context).cart),
+                          content: Column(
+                            children: [
+                              // FutureBuilder<List<CartProductModel>>(
+                              //     future: cart.cartProducts,
+                              //     builder: (context,
+                              //         AsyncSnapshot<List<CartProductModel>>
+                              //             snapshot) {
+                              //       if (snapshot.hasData) {
+                              //         if (snapshot.data!.isEmpty) {
+                              //           cart.isEmpty = true;
+                              //           return Column(
+                              //             crossAxisAlignment:
+                              //                 CrossAxisAlignment.center,
+                              //             mainAxisAlignment: MainAxisAlignment.center,
+                              //             children: [
+                              //               Image.asset(
+                              //                 "assets/images/Empty-Cart.jpg",
+                              //               ),
+                              //             ],
+                              //           );
+                              //         }
+                              //         cart.isEmpty = false;
+                              //         return Column(
+                              //           crossAxisAlignment: CrossAxisAlignment.end,
+                              //           children: [
+                              //             SizedBox(
+                              //               height:
+                              //                   MediaQuery.of(context).size.height *
+                              //                       snapshot.data!.length /
+                              //                       6,
+                              //               child: ListView.builder(
+                              //                 itemBuilder: (context, index) {
+                              //                   cart.businessId =
+                              //                       snapshot.data![index].businessId;
+                              //                   return CartWidget(
+                              //                     itemId: snapshot.data![index].id!,
+                              //                     id: snapshot.data![index].id!,
+                              //                     name: cart
+                              //                         .allCartProducts[index].name
+                              //                         .toString(),
+                              //                     description: "",
+                              //                     productPrice: snapshot
+                              //                         .data![index].price!
+                              //                         .toDouble(),
+                              //                     initialPrice: snapshot
+                              //                         .data![index].price!
+                              //                         .toDouble(),
+                              //                     image: snapshot.data![index]
+                              //                         .productProfileImg!,
+                              //                     qty: snapshot.data![index].qty!,
+                              //                     productID: snapshot
+                              //                         .data![index].productId
+                              //                         .toString(),
+                              //                     color: 0,
+                              //                     businessId: snapshot
+                              //                         .data![index].businessId!,
+                              //                     message: '',
+                              //                   );
+                              //                 },
+                              //                 itemCount: snapshot.data!.length,
+                              //               ),
+                              //             ),
+                              //           ],
+                              //         );
+                              //       } else if (snapshot.hasError) {
+                              //         print(snapshot.error);
+                              //       }
+                              //       return const CircularProgressIndicator();
+                              //     }),
+                              SizedBox(
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context, index) {
+                                    return CartBouqWidget(
+                                      itemId: cart.bouquetList.values
+                                          .toList()[index]
+                                          .id,
+                                      id: cart.bouquetList.values
+                                          .toList()[index]
+                                          .id,
+                                      name: cart.bouquetList.values
+                                          .toList()[index]
+                                          .productName,
+                                      description: '',
+                                      productPrice: cart.bouquetList.values
+                                          .toList()[index]
+                                          .productPrice
+                                          .toDouble(),
+                                      initialPrice: cart.bouquetList.values
+                                          .toList()[index]
+                                          .productPrice
+                                          .toDouble(),
+                                      image: cart.bouquetList.values
+                                          .toList()[index]
+                                          .image,
+                                      qty: cart.bouquetList.values
+                                          .toList()[index]
+                                          .quantity
+                                          .toDouble(),
+                                      productID:
+                                          cart.bouquetList.keys.toList()[index],
+                                      color: widget.currentColor,
+                                      businessId: cart.bouquetList.values
+                                          .toList()[index]
+                                          .businessId,
+                                      message: widget.message,
+                                    );
+                                  },
+                                  itemCount: cart.bouquetList.length,
+                                ),
+                              ),
+                              Consumer<CartViewModel>(
+                                  builder: (context, value, child) {
+                                return Visibility(
+                                  visible: value.totalBouquetAmount
+                                              .toStringAsFixed(2) ==
+                                          "0.00"
+                                      ? false
+                                      : true,
+                                  child: Column(
+                                    children: [
+                                      ReusableWidget(
+                                          title: translation(context).subtotal,
+                                          value:
+                                              "${value.totalAmount.toStringAsFixed(2)} JD"),
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      InkWell(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: mainColor,
+                                          ),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              2,
+                                          height: 25,
+                                          child: const Center(
+                                            child: Text(
+                                              "Delete All Item",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        onTap: () {
+                                          // cart.dbHelper.deleteAll();
+                                          // cart.removeAllCounter();
+                                          // cart.removeAllTotalPrice();
+                                          cart.clearBouquet();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              })
+                            ],
+                          ),
+                          isActive: cart.currentStep_ >= 0,
+                          state: cart.currentStep_ >= 0
+                              ? StepState.complete
+                              : StepState.disabled,
+                        ),
+                        Step(
+                          title: Text(translation(context).address),
+                          content: SingleChildScrollView(
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  TextFieldWidget(
+                                    hint: translation(context).enterCity,
+                                    label: translation(context).city,
+                                    textEditingController: cart.city,
+                                    textType: TextInputType.text,
+                                    validator: (value) {
+                                      if (value.toString().isEmpty) {
+                                        return "Please Enter Your City";
+                                      }
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  TextFieldWidget(
+                                    hint: translation(context).enterAddress,
+                                    label: translation(context).address,
+                                    textEditingController: cart.addressText,
+                                    textType: TextInputType.text,
+                                    validator: (value) {
+                                      if (value.toString().isEmpty) {
+                                        return "Please Enter Your Address";
+                                      }
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  TextFieldWidget(
+                                    hint: translation(context).enterStreet,
+                                    label: translation(context).street,
+                                    textEditingController: cart.street,
+                                    textType: TextInputType.text,
+                                    validator: (value) {
+                                      if (value.toString().isEmpty) {
+                                        return "Please Enter Your Street";
+                                      }
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  TextFieldWidget(
+                                    hint: translation(context).enterBuilding,
+                                    label: translation(context).building,
+                                    textEditingController: cart.building,
+                                    textType: TextInputType.phone,
+                                    validator: (value) {
+                                      if (value.toString().isEmpty) {
+                                        return "Please Enter Your Building Number";
+                                      }
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  TextFieldWidget(
+                                    hint: translation(context).enterFloor,
+                                    label: translation(context).floor,
+                                    textEditingController: cart.floor,
+                                    textType: TextInputType.phone,
+                                    validator: (value) {
+                                      if (value.toString().isEmpty) {
+                                        return "Please Enter Your Floor Number";
+                                      }
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  TextFieldWidget(
+                                    hint: translation(context).enterPhone,
+                                    label: translation(context).phoneNumber,
+                                    textEditingController: cart.phone,
+                                    textType: TextInputType.phone,
+                                    validator: (value) {
+                                      RegExp regex =
+                                          RegExp(r'(^(?:[+0]9)?[0-9]{10,10}$)');
+                                      if (!regex.hasMatch(value)) {
+                                        return 'Enter Valid Phone Number';
+                                      } else
+                                        return null;
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  TextFieldWidget(
+                                    hint: "Please write note",
+                                    label: "Add Note",
+                                    textEditingController: cart.note,
+                                    textType: TextInputType.text,
+                                    validator: (value) {
+                                      if (value.toString().isEmpty)
+                                        return "Please Enter any note";
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          isActive: cart.currentStep_ >= 1,
+                          state: cart.currentStep_ >= 1
+                              ? StepState.complete
+                              : StepState.disabled,
+                        ),
+                        Step(
+                          title: Text(translation(context).payment),
+                          content: SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.all(15),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const TextUtils(
+                                    fontWeight: FontWeight.bold,
+                                    text: "Shopping to",
+                                    color: Colors.black,
+                                    fontSize: 24,
+                                  ),
+
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  DeliveryContainerWidget(
+                                    address: cart.addressText.text,
+                                    phone: cart.phone.text,
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Center(
+                                    child: TextUtils(
+                                      fontWeight: FontWeight.bold,
+                                      text:
+                                          "Total:${cart.totalBouquetAmount.toStringAsFixed(2)} JD",
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Center(
+                                    child: SizedBox(
+                                      height: 50,
+                                      width: 150,
+                                      child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              elevation: 0,
+                                              primary: mainColor),
+                                          onPressed: () {
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              // cart.sendEmail(
+                                              //     toEmail:
+                                              //         "wardapplication2@gmail.com",
+                                              //     name: 'Flora Application',
+                                              //     email: "",
+                                              //     subject: "Orders",
+                                              //     message: 'message');
+                                              // cart.dbHelper.deleteAll();
+
+                                              cart.currentStep = 0;
+                                              cart.activeStep = 0;
+                                              cart.currentStep_ = 0;
+                                              cart.address(
+                                                city: cart.city.text,
+                                                address: cart.addressText.text,
+                                                streetName: cart.street.text,
+                                                building: int.parse(
+                                                    cart.building.text),
+                                                floor:
+                                                    int.parse(cart.floor.text),
+                                                mobile: cart.phone.text,
+                                                userId: userId,
+                                                businessId: cart
+                                                    .bouquetList.values
+                                                    .toList()[0]
+                                                    .businessId,
+                                                status: 0,
+                                                note: cart.note.text,
+                                              );
+
+                                              Future.delayed(
+                                                  const Duration(seconds: 3),
+                                                  () {
+                                                cart.bouquetList.values
+                                                    .toList()
+                                                    .forEach((element) async {
+                                                  await cart
+                                                      .ordersDetails(
+                                                        businessId:
+                                                            element.businessId,
+                                                        paymentMethod: 1,
+                                                        productId: 5,
+                                                        qty: element.quantity
+                                                            .toDouble(),
+                                                        singlePrice: element
+                                                            .productPrice
+                                                            .toDouble(),
+                                                        totalPrice: (element
+                                                                    .quantity *
+                                                                element
+                                                                    .productPrice)
+                                                            .toDouble(),
+                                                        color:
+                                                            widget.currentColor,
+                                                        message: widget.message,
+                                                        type: 1,
+                                                        name:
+                                                            element.productName,
+                                                        image: element.image,
+                                                        context: context,
+                                                      )
+                                                      .whenComplete(() =>
+                                                          cart.clearBouquet());
+                                                });
+                                                cart.phone.clear();
+                                                cart.note.clear();
+                                                cart.city.clear();
+                                                cart.addressText.clear();
+                                                cart.street.clear();
+                                                cart.building.clear();
+                                                cart.floor.clear();
+                                              });
+                                              Navigator.of(context)
+                                                  .pushReplacement(
+                                                      MaterialPageRoute(
+                                                          builder: (_) =>
+                                                              SuccessPage()));
+
+                                              // Navigator.of(context).pushNamed(
+                                              //     AppRoutes.mainHomeScreen);
+                                            } else
+                                              showDialog<String>(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        AlertDialog(
+                                                  title: const Text(
+                                                      'Address is Required'),
+                                                  content: const Text(
+                                                      'Please back and fill address'),
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(
+                                                            context, 'OK');
+                                                      },
+                                                      child: const Text('OK'),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                          },
+                                          child: Text(
+                                            translation(context).pay,
+                                            style: const TextStyle(
+                                                fontSize: 22,
+                                                color: Colors.white),
+                                          )),
+                                    ),
+                                  )
+                                  // totalWidget(),
+                                ],
+                              ),
+                            ),
+                          ),
+                          isActive: cart.currentStep_ >= 2,
+                          state: cart.currentStep_ >= 2
+                              ? StepState.complete
+                              : StepState.disabled,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+    );
+  }
+
+  tapped(int step) {
+    final cart = Provider.of<CartViewModel>(context);
+
+    setState(() => cart.currentStep_ = step);
+  }
+
+  continued() {
+    final cart = Provider.of<CartViewModel>(context);
+
+    cart.currentStep_ < 2 ? setState(() => cart.currentStep_ += 1) : null;
+  }
+
+  cancel() {
+    final cart = Provider.of<CartViewModel>(context);
+
+    cart.currentStep_ > 0 ? setState(() => cart.currentStep_ -= 1) : null;
+  }
+}
