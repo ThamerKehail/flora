@@ -377,9 +377,11 @@
 //     ));
 //   }
 // }
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pinput/pinput.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:ward/utils/routes.dart';
 import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/edit_password/edit_password.dart';
@@ -398,32 +400,37 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   final FirebaseAuth auth = FirebaseAuth.instance;
+  final formKey = GlobalKey<FormState>();
+  StreamController<ErrorAnimationType>? errorController;
+  TextEditingController textEditingController = TextEditingController();
+  String currentText = "";
+
   @override
   Widget build(BuildContext context) {
-    final defaultPinTheme = PinTheme(
-      width: 56,
-      height: 56,
-      textStyle: TextStyle(
-          fontSize: 20,
-          color: Color.fromRGBO(30, 60, 87, 1),
-          fontWeight: FontWeight.w600),
-      decoration: BoxDecoration(
-        border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
-        borderRadius: BorderRadius.circular(20),
-      ),
-    );
+    // final defaultPinTheme = PinTheme(
+    //   width: 56,
+    //   height: 56,
+    //   textStyle: TextStyle(
+    //       fontSize: 20,
+    //       color: Color.fromRGBO(30, 60, 87, 1),
+    //       fontWeight: FontWeight.w600),
+    //   decoration: BoxDecoration(
+    //     border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
+    //     borderRadius: BorderRadius.circular(20),
+    //   ),
+    // );
 
-    final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: Color.fromRGBO(114, 178, 238, 1)),
-      borderRadius: BorderRadius.circular(8),
-    );
-
-    final submittedPinTheme = defaultPinTheme.copyWith(
-      decoration: defaultPinTheme.decoration?.copyWith(
-        color: Color.fromRGBO(234, 239, 243, 1),
-      ),
-    );
-    var code = "";
+    // final focusedPinTheme = defaultPinTheme.copyDecorationWith(
+    //   border: Border.all(color: Color.fromRGBO(114, 178, 238, 1)),
+    //   borderRadius: BorderRadius.circular(8),
+    // );
+    //
+    // final submittedPinTheme = defaultPinTheme.copyWith(
+    //   decoration: defaultPinTheme.decoration?.copyWith(
+    //     color: Color.fromRGBO(234, 239, 243, 1),
+    //   ),
+    // );
+    // var code = "";
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -470,18 +477,107 @@ class _OtpScreenState extends State<OtpScreen> {
               SizedBox(
                 height: 30,
               ),
-              Pinput(
-                length: 6,
-                // defaultPinTheme: defaultPinTheme,
-                // focusedPinTheme: focusedPinTheme,
-                // submittedPinTheme: submittedPinTheme,
+              Form(
+                key: formKey,
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 30),
+                    child: PinCodeTextField(
+                      appContext: context,
+                      pastedTextStyle: TextStyle(
+                        color: mainColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      length: 6,
+                      obscureText: true,
+                      obscuringCharacter: '*',
+                      obscuringWidget:
+                          Image.asset('assets/images/flora_logo.png'),
+                      blinkWhenObscuring: true,
+                      animationType: AnimationType.fade,
+                      validator: (v) {
+                        if (v!.length < 6) {
+                          return "I'm from validator";
+                        } else {
+                          return null;
+                        }
+                      },
+                      pinTheme: PinTheme(
+                        inactiveFillColor: Colors.white,
+                        selectedFillColor: Colors.white,
+                        activeColor: mainColor,
+                        selectedColor: Colors.white,
+                        inactiveColor: Colors.white,
+                        disabledColor: Colors.white,
+                        shape: PinCodeFieldShape.box,
+                        borderRadius: BorderRadius.circular(5),
+                        fieldHeight: 50,
+                        fieldWidth: 40,
+                        activeFillColor: Colors.white,
+                      ),
+                      cursorColor: Colors.black,
+                      animationDuration: const Duration(milliseconds: 300),
+                      enableActiveFill: true,
+                      errorAnimationController: errorController,
+                      controller: textEditingController,
+                      keyboardType: TextInputType.number,
 
-                showCursor: true,
-                onCompleted: (pin) => print(pin),
-                onChanged: (value) {
-                  code = value;
-                },
+                      boxShadows: const [
+                        BoxShadow(
+                          offset: Offset(0, 1),
+                          color: Colors.black12,
+                          blurRadius: 10,
+                        )
+                      ],
+                      onCompleted: (v) async {
+                        debugPrint("Completed $currentText");
+                        try {
+                          PhoneAuthCredential credential =
+                              PhoneAuthProvider.credential(
+                            verificationId: PhoneRegister.verify,
+                            smsCode: currentText,
+                          );
+                          await auth.signInWithCredential(credential);
+                          Navigator.of(context)
+                              .pushReplacement(MaterialPageRoute(
+                                  builder: (_) => widget.index == 1
+                                      ? RegisterScreen(
+                                          mobile: widget.phoneNumber,
+                                        )
+                                      : EditPassword()));
+                        } catch (e) {
+                          snackBar("Please check OTP");
+                        }
+                      },
+                      // onTap: () {
+                      //   print("Pressed");
+                      // },
+                      onChanged: (value) {
+                        debugPrint(value);
+                        setState(() {
+                          currentText = value;
+                        });
+                      },
+                      beforeTextPaste: (text) {
+                        debugPrint("Allowing to paste $text");
+                        //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+                        //but you can show anything you want here, like your pop up saying wrong paste format or etc
+                        return true;
+                      },
+                    )),
               ),
+              // Pinput(
+              //   length: 6,
+              //   // defaultPinTheme: defaultPinTheme,
+              //   // focusedPinTheme: focusedPinTheme,
+              //   // submittedPinTheme: submittedPinTheme,
+              //
+              //   showCursor: true,
+              //   onCompleted: (pin) => print(pin),
+              //   onChanged: (value) {
+              //     code = value;
+              //   },
+              // ),
               SizedBox(
                 height: 20,
               ),
@@ -498,7 +594,7 @@ class _OtpScreenState extends State<OtpScreen> {
                         PhoneAuthCredential credential =
                             PhoneAuthProvider.credential(
                           verificationId: PhoneRegister.verify,
-                          smsCode: code,
+                          smsCode: currentText,
                         );
                         await auth.signInWithCredential(credential);
                         Navigator.of(context).pushReplacement(MaterialPageRoute(

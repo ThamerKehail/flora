@@ -12,6 +12,7 @@ import 'package:ward/data/api/balloons_places_api.dart';
 import 'package:ward/data/api/business_color_api.dart';
 import 'package:ward/data/api/business_rated_api.dart';
 import 'package:ward/data/api/cart_product_api.dart';
+import 'package:ward/data/api/delete_account_api.dart';
 import 'package:ward/data/api/edit_password_api.dart';
 import 'package:ward/data/api/edit_profile_api.dart';
 import 'package:ward/data/api/flowersAndBalloons_places_api.dart';
@@ -31,6 +32,7 @@ import 'package:ward/data/repositories/all_places_repository.dart';
 import 'package:ward/data/repositories/balloons_banners_repository.dart';
 import 'package:ward/data/repositories/balloons_places_repository.dart';
 import 'package:ward/data/repositories/business_check_repository.dart';
+import 'package:ward/data/repositories/delete_account_repository.dart';
 import 'package:ward/data/repositories/edit_password_repository.dart';
 import 'package:ward/data/repositories/edit_profile_repository.dart';
 import 'package:ward/data/repositories/flowers_balloons_places_repository.dart';
@@ -86,11 +88,16 @@ import 'data/repositories/cart_product_repository.dart';
 import 'data/repositories/delete_cart_item_repository.dart';
 import 'data/repositories/flowers_balloons_banners_repository.dart';
 import 'data/repositories/update_qty_repository.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   await getUserId();
   await getSetLocation();
   await getBusinessIdInCart();
@@ -145,7 +152,8 @@ void main() async {
           UpdateQtyRepository(UpdateQtyApi(DioClient()))),
     ),
     ChangeNotifierProvider(
-      create: (_) => ProfileViewModel(UserRepository(UserApi(DioClient()))),
+      create: (_) => ProfileViewModel(UserRepository(UserApi(DioClient())),
+          DeleteAccountRepository(DeleteAccountApi(DioClient()))),
     ),
     ChangeNotifierProvider(
       create: (_) => BalloonsPlacesViewModel(

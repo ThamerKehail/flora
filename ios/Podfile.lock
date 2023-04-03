@@ -37,8 +37,6 @@ PODS:
   - FMDB/standard (2.7.5)
   - geocoding (1.0.5):
     - Flutter
-  - geolocator_apple (1.2.0):
-    - Flutter
   - google_sign_in_ios (0.0.1):
     - Flutter
     - GoogleSignIn (~> 6.2)
@@ -75,8 +73,6 @@ PODS:
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - smart_auth (0.0.1):
-    - Flutter
   - sqflite (0.0.2):
     - Flutter
     - FMDB (>= 2.7.5)
@@ -87,12 +83,10 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_paytabs_bridge (from `.symlinks/plugins/flutter_paytabs_bridge/ios`)
   - geocoding (from `.symlinks/plugins/geocoding/ios`)
-  - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
-  - smart_auth (from `.symlinks/plugins/smart_auth/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
 SPEC REPOS:
@@ -121,8 +115,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_paytabs_bridge/ios"
   geocoding:
     :path: ".symlinks/plugins/geocoding/ios"
-  geolocator_apple:
-    :path: ".symlinks/plugins/geolocator_apple/ios"
   google_sign_in_ios:
     :path: ".symlinks/plugins/google_sign_in_ios/ios"
   image_picker_ios:
@@ -131,8 +123,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/ios"
-  smart_auth:
-    :path: ".symlinks/plugins/smart_auth/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/ios"
 
@@ -148,7 +138,6 @@ SPEC CHECKSUMS:
   flutter_paytabs_bridge: 6a5a2afdecd5a7eb61c6e3a74c5a8b1782a3e32f
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geocoding: 32cfcdb16d38d907caaba65e2e42ad10d38bee58
-  geolocator_apple: cc556e6844d508c95df1e87e3ea6fa4e58c50401
   google_sign_in_ios: 4f85eb9f937450765c8573bb85fd8cd6a5af675c
   GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
   GoogleUtilities: c2bdc4cf2ce786c4d2e6b3bcfd599a25ca78f06f
@@ -159,7 +148,6 @@ SPEC CHECKSUMS:
   PayTabsSDK: 825c609aed2b03bef8e7e586bdd880bd54a56d41
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   shared_preferences_foundation: 297b3ebca31b34ec92be11acd7fb0ba932c822ca
-  smart_auth: 4bedbc118723912d0e45a07e8ab34039c19e04f2
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
 
 PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d

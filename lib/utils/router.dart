@@ -9,7 +9,6 @@ import 'package:ward/view/pages/bouquet_details/bouquet_details.dart';
 import 'package:ward/view/pages/cart_page/cart_page.dart';
 import 'package:ward/view/pages/edit_password/edit_password.dart';
 import 'package:ward/view/pages/home_page/home_page.dart';
-import 'package:ward/view/pages/location_permeation_page/location_permation_page.dart';
 import 'package:ward/view/pages/main_home_page/main_home_page.dart';
 import 'package:ward/view/pages/order_history_page/order_history_page.dart';
 import 'package:ward/view/pages/profile_page/profile_page.dart';
@@ -71,6 +70,6 @@ Route<dynamic> onGenerate(RouteSettings routeSettings) {
       return MaterialPageRoute(builder: (_) => const LoginPage());
     case AppRoutes.splashScreen:
     default:
-      return MaterialPageRoute(builder: (_) => const SplashScreen());
+      return MaterialPageRoute(builder: (_) => SplashScreen());
   }
 }

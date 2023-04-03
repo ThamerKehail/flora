@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ward/models/user_model.dart';
 import 'package:ward/utils/routes.dart';
-import 'package:ward/view/pages/google_info.dart';
 import 'package:ward/view/pages/profile_page/profile_view_model.dart';
 
 import '../../../main.dart';
@@ -16,7 +15,6 @@ import '../../widget/profile_widget/button_widget.dart';
 import '../../widget/profile_widget/profile_icon_widget.dart';
 import '../../widget/profile_widget/profile_widget.dart';
 import '../edit_profile/edit_profile.dart';
-import '../login_page/google_signIn_provider.dart';
 import '../login_page/login_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -185,6 +183,27 @@ class _ProfilePageState extends State<ProfilePage> {
                       onTap: () async {
                         Navigator.of(context)
                             .pushNamed(AppRoutes.allRateUsScreen);
+                      },
+                    ),
+              const SizedBox(
+                height: 35,
+              ),
+              userId == 0
+                  ? SizedBox()
+                  : ProfileIconWidget(
+                      image: "assets/images/remove-user.png",
+                      text: translation(context).deleteAccount,
+                      onTap: () async {
+                        String status;
+                        status = await user.deleteAccount();
+                        if (status == "Success") {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.setInt('userId', 0);
+                          userId = 0;
+                          Navigator.of(context)
+                              .pushReplacementNamed(AppRoutes.mainHomeScreen);
+                        }
                       },
                     ),
               userId == 0

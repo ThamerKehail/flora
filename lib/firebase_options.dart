@@ -59,11 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDspjw7s0GkXe_mVwx56wN8Qjrpps8M_eE',
-    appId: '1:242684238279:ios:462a671fcf4395fd6161e2',
+    appId: '1:242684238279:ios:02ec5294b9ad3a046161e2',
     messagingSenderId: '242684238279',
     projectId: 'flora-81a20',
     storageBucket: 'flora-81a20.appspot.com',
-    iosClientId: '242684238279-9slcbrs5sbql2u12mgdbpsvlgmgl5066.apps.googleusercontent.com',
-    iosBundleId: 'com.example.ward',
+    iosClientId:
+        '242684238279-63bd3mkjug3igefogtg5pkmsaoetclob.apps.googleusercontent.com',
+    iosBundleId: 'com.floraapp.ehsan',
   );
 }

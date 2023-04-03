@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:pinput/pinput.dart';
 import 'package:ward/utils/routes.dart';
 import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/register_screen/phone_register.dart';
-import 'package:ward/view/pages/register_screen/register_screen.dart';
 
 import '../edit_password/edit_password.dart';
 
@@ -21,29 +19,29 @@ class _ForgetOtpScreenState extends State<ForgetOtpScreen> {
   final FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-    final defaultPinTheme = PinTheme(
-      width: 56,
-      height: 56,
-      textStyle: TextStyle(
-          fontSize: 20,
-          color: Color.fromRGBO(30, 60, 87, 1),
-          fontWeight: FontWeight.w600),
-      decoration: BoxDecoration(
-        border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
-        borderRadius: BorderRadius.circular(20),
-      ),
-    );
-
-    final focusedPinTheme = defaultPinTheme.copyDecorationWith(
-      border: Border.all(color: Color.fromRGBO(114, 178, 238, 1)),
-      borderRadius: BorderRadius.circular(8),
-    );
-
-    final submittedPinTheme = defaultPinTheme.copyWith(
-      decoration: defaultPinTheme.decoration?.copyWith(
-        color: Color.fromRGBO(234, 239, 243, 1),
-      ),
-    );
+    // final defaultPinTheme = PinTheme(
+    //   width: 56,
+    //   height: 56,
+    //   textStyle: TextStyle(
+    //       fontSize: 20,
+    //       color: Color.fromRGBO(30, 60, 87, 1),
+    //       fontWeight: FontWeight.w600),
+    //   decoration: BoxDecoration(
+    //     border: Border.all(color: Color.fromRGBO(234, 239, 243, 1)),
+    //     borderRadius: BorderRadius.circular(20),
+    //   ),
+    // );
+    //
+    // final focusedPinTheme = defaultPinTheme.copyDecorationWith(
+    //   border: Border.all(color: Color.fromRGBO(114, 178, 238, 1)),
+    //   borderRadius: BorderRadius.circular(8),
+    // );
+    //
+    // final submittedPinTheme = defaultPinTheme.copyWith(
+    //   decoration: defaultPinTheme.decoration?.copyWith(
+    //     color: Color.fromRGBO(234, 239, 243, 1),
+    //   ),
+    // );
     var code = "";
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -91,18 +89,18 @@ class _ForgetOtpScreenState extends State<ForgetOtpScreen> {
               SizedBox(
                 height: 30,
               ),
-              Pinput(
-                length: 6,
-                // defaultPinTheme: defaultPinTheme,
-                // focusedPinTheme: focusedPinTheme,
-                // submittedPinTheme: submittedPinTheme,
-
-                showCursor: true,
-                onCompleted: (pin) => print(pin),
-                onChanged: (value) {
-                  code = value;
-                },
-              ),
+              // Pinput(
+              //   length: 6,
+              //   // defaultPinTheme: defaultPinTheme,
+              //   // focusedPinTheme: focusedPinTheme,
+              //   // submittedPinTheme: submittedPinTheme,
+              //
+              //   showCursor: true,
+              //   onCompleted: (pin) => print(pin),
+              //   onChanged: (value) {
+              //     code = value;
+              //   },
+              // ),
               SizedBox(
                 height: 20,
               ),
