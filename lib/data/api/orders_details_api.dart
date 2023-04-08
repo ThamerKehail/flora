@@ -47,6 +47,8 @@ class OrdersDetailsApi {
           'Accept': 'application/json',
           'Content-Type': 'multipart/form-data',
         }));
+    print(response.statusCode);
+    print(response.data);
     if (response.statusCode == 200) {
       final body = response.data;
       print(body);

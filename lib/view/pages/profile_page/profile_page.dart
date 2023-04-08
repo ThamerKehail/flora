@@ -73,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ProfileWidget(
                           imagePath: snapshot.data![0].profileImage == 'na'
                               ? 'https://cdn-icons-png.flaticon.com/512/3024/3024605.png'
-                              : "$url/${snapshot.data![0].profileImage}",
+                              : "https://www.florajo.com/assets/images/users/${snapshot.data![0].profileImage}",
                           onClicked: () async {
                             await Navigator.of(context).push(
                               MaterialPageRoute(
@@ -275,7 +275,7 @@ Widget buildName({required String name, required String email}) => Column(
         const SizedBox(height: 4),
         const SizedBox(height: 4),
         Text(
-          '${email} $userId',
+          '${email} ',
           style: const TextStyle(color: Colors.grey),
         )
       ],

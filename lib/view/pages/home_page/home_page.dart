@@ -120,8 +120,6 @@ class _HomePageState extends State<HomePage> {
                       return SizedBox(
                         width: double.infinity,
                         child: CachedNetworkImage(
-                          width: 124,
-                          height: 124,
                           imageUrl: "$url/${snapshot.data![0].bannerImg}",
                           errorWidget: (BuildContext, String, dynamic) =>
                               Image.asset(

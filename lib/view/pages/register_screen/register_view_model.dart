@@ -22,6 +22,13 @@ class RegisterViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool loading = false;
+
+  setLoading(bool setLoading) {
+    loading = setLoading;
+    notifyListeners();
+  }
+
   Future register({
     required String email,
     required String fname,

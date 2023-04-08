@@ -8,7 +8,7 @@ class Orders {
   int? qty;
   dynamic singlePrice;
   dynamic totalPrice;
-  int? color;
+  String? color;
   String? image;
   String? name;
   String? message;

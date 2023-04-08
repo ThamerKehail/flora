@@ -101,7 +101,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
 
-    final cart = Provider.of<CartViewModel>(context);
+    final cart = context.watch<CartViewModel>();
 
     return Scaffold(
       appBar: AppBar(
@@ -558,6 +558,7 @@ class _CartPageState extends State<CartPage> {
                                                           .getInstance();
                                                   cart.item
                                                       .forEach((key, element) {
+                                                    cart.setLoading(true);
                                                     cart.cartProduct.add({
                                                       'order_id':
                                                           '${prefs.getInt('order_id')}',
@@ -583,7 +584,10 @@ class _CartPageState extends State<CartPage> {
                                                       'type': '1',
                                                     });
                                                   });
-
+                                                  print(
+                                                      "==================cart===============");
+                                                  print(
+                                                      cart.cartProduct.length);
                                                   print(cart.cartProduct);
 
                                                   cart.ordersDetails(
@@ -601,80 +605,8 @@ class _CartPageState extends State<CartPage> {
                                                     dataList: cart.cartProduct,
                                                     context: context,
                                                   );
+                                                  cart.setLoading(false);
                                                 },
-                                                // {
-                                                //   // payPressed(cart.totalAmount);
-                                                //
-                                                //   if (_formKey.currentState!
-                                                //       .validate()) {
-                                                //     // cart.dbHelper.deleteAll();
-                                                //
-                                                //     cart.address(
-                                                //       city: cart.city.text,
-                                                //       address:
-                                                //           cart.addressText.text,
-                                                //       streetName:
-                                                //           cart.street.text,
-                                                //       building: int.parse(
-                                                //           cart.building.text),
-                                                //       floor: int.parse(
-                                                //           cart.floor.text),
-                                                //       mobile: cart.phone.text,
-                                                //       userId: firebaseUser
-                                                //                   ?.displayName !=
-                                                //               null
-                                                //           ? int.parse(
-                                                //               firebaseUser
-                                                //                       ?.uid ??
-                                                //                   '0')
-                                                //           : userId,
-                                                //       businessId: cart
-                                                //           .item.values
-                                                //           .toList()[0]
-                                                //           .businessId,
-                                                //       status: 0,
-                                                //       note: cart.note.text,
-                                                //     );
-                                                //
-                                                //     print("Send Email");
-                                                //
-                                                //     Future.delayed(
-                                                //       Duration(
-                                                //           milliseconds: 350),
-                                                //       () => Navigator.of(
-                                                //               context)
-                                                //           .pushReplacement(
-                                                //               MaterialPageRoute(
-                                                //                   builder: (_) =>
-                                                //                       SuccessPage())),
-                                                //     );
-                                                //
-                                                //     // Navigator.of(context).pushNamed(
-                                                //     //     AppRoutes.mainHomeScreen);
-                                                //   } else
-                                                //     showDialog<String>(
-                                                //       context: context,
-                                                //       builder: (BuildContext
-                                                //               context) =>
-                                                //           AlertDialog(
-                                                //         title: const Text(
-                                                //             'Address is Required'),
-                                                //         content: const Text(
-                                                //             'Please back and fill address'),
-                                                //         actions: <Widget>[
-                                                //           TextButton(
-                                                //             onPressed: () {
-                                                //               Navigator.pop(
-                                                //                   context,
-                                                //                   'OK');
-                                                //             },
-                                                //             child: const Text(
-                                                //                 'OK'),
-                                                //           ),
-                                                //         ],
-                                                //       ),
-                                                //     );
-                                                // },
                                                 child: Text(
                                                   translation(context).pay,
                                                   style: const TextStyle(

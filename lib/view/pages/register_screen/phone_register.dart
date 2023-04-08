@@ -349,6 +349,8 @@ class _PhoneRegisterState extends State<PhoneRegister> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
                       onPressed: () async {
+                        Provider.of<RegisterViewModel>(context, listen: false)
+                            .setLoading(true);
                         if (_formKey.currentState!.validate()) print(phone);
                         {
                           print(countryController.text + phone);
@@ -375,14 +377,21 @@ class _PhoneRegisterState extends State<PhoneRegister> {
                                                 )));
                                   },
                                   codeAutoRetrievalTimeout:
-                                      (String verificationId) {},
+                                      (String verificationId) {
+                                    print(verificationId);
+                                  },
                                 )
                               : users.snackBar(
                                   "Phone is already Register ", context);
                         }
                       },
-                      child: Text("Send the code")),
-                )
+                      child:
+                          Provider.of<RegisterViewModel>(context, listen: false)
+                                      .loading ==
+                                  true
+                              ? CircularProgressIndicator()
+                              : Text("Send the code")),
+                ),
               ],
             ),
           ),

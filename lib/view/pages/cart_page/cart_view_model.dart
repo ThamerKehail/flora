@@ -616,4 +616,11 @@ class CartViewModel with ChangeNotifier {
 
     notifyListeners();
   }
+
+  bool loading = false;
+
+  setLoading(bool setLoading) {
+    loading = setLoading;
+    notifyListeners();
+  }
 }

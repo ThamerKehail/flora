@@ -123,7 +123,7 @@ class _BalloonsPlacesState extends State<BalloonsPlaces> {
 
                     for (var element in products) {
                       balloons.bannerImg.add(
-                          "http://www.florajo.com/assets/img/banner/${element.bannerImg}");
+                          "http://www.florajo.com/uploads/${element.bannerImg}");
                     }
                     return CarouselWithDotsPage(
                       imgList: balloons.bannerImg,
