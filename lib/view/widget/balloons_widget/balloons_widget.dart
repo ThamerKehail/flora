@@ -39,7 +39,7 @@ class BalloonsPlacesWidget extends StatelessWidget {
   // final double city;
   // final String email;
   final AllPlaces allPlaces;
-
+//end
   const BalloonsPlacesWidget({
     Key? key,
     // required this.fname,
