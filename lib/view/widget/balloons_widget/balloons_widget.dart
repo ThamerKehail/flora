@@ -7,18 +7,12 @@ import 'package:ward/models/all_places_model.dart';
 import 'package:ward/utils/const.dart';
 import 'package:ward/utils/theme.dart';
 
-import '../../../data/api/add_to_wishlist_api.dart';
 import '../../../data/api/avg_business_rate.dart';
-import '../../../data/api/delete_wishlist_item_api.dart';
 import '../../../data/api/package_api.dart';
 import '../../../data/api/product_api.dart';
-import '../../../data/api/wishlist_product_api.dart';
-import '../../../data/repositories/add_to_wishlist_repository.dart';
 import '../../../data/repositories/avg_business_repository.dart';
-import '../../../data/repositories/delete_wishlist_item_repository.dart';
 import '../../../data/repositories/package_repository.dart';
 import '../../../data/repositories/product_repositories.dart';
-import '../../../data/repositories/wishlist_product_repository.dart';
 import '../../../dio/dio_client.dart';
 import '../../pages/bouquet_details/bouquet_view_main.dart';
 import '../../pages/store_page/store_page.dart';
@@ -64,36 +58,54 @@ class BalloonsPlacesWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider(
-                        create: (_) => WishlistViewModel(),
-                        child: ChangeNotifierProvider(
-                            create: (_) => BouquetViewModel(
-                                BusinessColorRepository(
-                                    BusinessColorApi(DioClient()))),
+          (now.hour >= int.parse(allPlaces.from.toString().split(':')[0]) &&
+                  now.hour < int.parse(allPlaces.to.toString().split(':')[0]))
+              ? Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ChangeNotifierProvider(
+                            create: (_) => WishlistViewModel(),
                             child: ChangeNotifierProvider(
-                              create: (_) => StoresViewModel(
-                                  ProductRepository(ProductApi(DioClient())),
-                                  PackageRepository(PackageApi(DioClient())),
-                                  AvgBusinessRepository(
-                                      AvgBusinessApi(DioClient()))),
-                              child: StorePage(
-                                businessId: allPlaces.id,
-                                placeName: allPlaces.fname,
-                                placeDescription: allPlaces.businessDescription,
-                                timeFrom: int.parse(
-                                    allPlaces.from.toString().split(':')[0]),
-                                timeTo: int.parse(
-                                    allPlaces.to.toString().split(':')[0]),
-                                address: allPlaces.address,
-                                city: allPlaces.city.toString(),
-                                cover: allPlaces.cover.toString(),
-                                email: allPlaces.email.toString(),
-                              ),
-                            )),
-                      )));
+                                create: (_) => BouquetViewModel(
+                                    BusinessColorRepository(
+                                        BusinessColorApi(DioClient()))),
+                                child: ChangeNotifierProvider(
+                                  create: (_) => StoresViewModel(
+                                      ProductRepository(
+                                          ProductApi(DioClient())),
+                                      PackageRepository(
+                                          PackageApi(DioClient())),
+                                      AvgBusinessRepository(
+                                          AvgBusinessApi(DioClient()))),
+                                  child: StorePage(
+                                    businessId: allPlaces.id,
+                                    placeName: allPlaces.fname,
+                                    placeDescription:
+                                        allPlaces.businessDescription,
+                                    timeFrom: int.parse(allPlaces.from
+                                        .toString()
+                                        .split(':')[0]),
+                                    timeTo: int.parse(
+                                        allPlaces.to.toString().split(':')[0]),
+                                    address: allPlaces.address,
+                                    city: allPlaces.city.toString(),
+                                    cover: allPlaces.cover.toString(),
+                                    email: allPlaces.email.toString(),
+                                  ),
+                                )),
+                          )))
+              : showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text('Store is Close'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'OK'),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
         },
         child: Container(
           width: double.infinity,
