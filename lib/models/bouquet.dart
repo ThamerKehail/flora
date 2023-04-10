@@ -7,6 +7,7 @@ class Bouquet {
   final int quantity;
   final int businessId;
   final String message;
+  final String businessEmail;
 
   final String image;
   Bouquet({
@@ -17,6 +18,7 @@ class Bouquet {
     required this.productPrice,
     required this.productName,
     required this.quantity,
+    required this.businessEmail,
   });
   Bouquet.fromMap(Map<dynamic, dynamic> res)
       : id = res['id'],
@@ -25,6 +27,7 @@ class Bouquet {
         image = res['image'],
         productPrice = double.parse(res['productPrice'].toString()),
         productName = res['productName'],
+        businessEmail = res['businessEmail'],
         quantity = res['quantity'];
   Map<String, dynamic> toMap() {
     return {
@@ -32,6 +35,7 @@ class Bouquet {
       'image': image,
       'productPrice': productPrice,
       'productName': productName,
+      'businessEmail': businessEmail,
       'quantity': quantity,
     };
   }

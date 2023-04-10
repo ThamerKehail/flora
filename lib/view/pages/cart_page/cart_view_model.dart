@@ -61,6 +61,7 @@ class CartViewModel with ChangeNotifier {
     required String color,
     required int businessId,
     required String message,
+    required String businessEmail,
   }) {
     _itemWishlist.putIfAbsent(
         productId,
@@ -73,6 +74,7 @@ class CartViewModel with ChangeNotifier {
               color: color,
               businessId: businessId,
               message: message,
+              businessEmail: businessEmail,
             ));
     print(_item);
     notifyListeners();
@@ -144,6 +146,7 @@ class CartViewModel with ChangeNotifier {
               quantity: existingCartItem.quantity + 1,
               businessId: existingCartItem.businessId,
               message: existingCartItem.message,
+              businessEmail: existingCartItem.businessEmail,
             ));
     notifyListeners();
   }
@@ -201,6 +204,7 @@ class CartViewModel with ChangeNotifier {
     required String productName,
     required String message,
     required int businessId,
+    required String businessEmail,
   }) {
     if (_bouquetList.containsKey(productId)) {
       _bouquetList.update(
@@ -213,6 +217,7 @@ class CartViewModel with ChangeNotifier {
                 quantity: existingCartItem.quantity + 1,
                 businessId: existingCartItem.businessId,
                 message: existingCartItem.message,
+                businessEmail: existingCartItem.businessEmail,
               ));
       print(_bouquetList);
     } else {
@@ -226,6 +231,7 @@ class CartViewModel with ChangeNotifier {
                 quantity: 1,
                 businessId: businessId,
                 message: message,
+                businessEmail: businessEmail,
               ));
       print(_item);
     }
@@ -282,6 +288,7 @@ class CartViewModel with ChangeNotifier {
                 quantity: existingCartItem.quantity - 1,
                 businessId: existingCartItem.businessId,
                 message: existingCartItem.message,
+                businessEmail: existingCartItem.businessEmail,
               ));
     } else {
       _bouquetList.remove(productId);

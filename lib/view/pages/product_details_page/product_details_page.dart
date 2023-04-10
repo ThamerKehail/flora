@@ -16,33 +16,25 @@ import '../../widget/product_details/color_picker.dart';
 import '../cart_page/cart_view_model.dart';
 
 class ProductDetailsPage extends StatefulWidget {
-  final String name;
-
-  final String productId;
-  final String nameAR;
-  final String image;
-  final String description;
-  final String descriptionAR;
-  final double price;
-  final int index;
-  final List<AllProductsBus> colors;
-  final String productProfileImg;
-  final int businessId;
+  // final String name;
+  //
+  // final String productId;
+  // final String nameAR;
+  // final String image;
+  // final String description;
+  // final String descriptionAR;
+  // final double price;
+  // final int index;
+  // final List<AllProductsBus> colors;
+  // final String productProfileImg;
+  // final int businessId;
+  // final String email;
+  final Product product;
   final String email;
 
   const ProductDetailsPage({
     Key? key,
-    required this.name,
-    required this.image,
-    required this.description,
-    required this.price,
-    required this.index,
-    required this.colors,
-    required this.businessId,
-    required this.nameAR,
-    required this.descriptionAR,
-    required this.productId,
-    required this.productProfileImg,
+    required this.product,
     required this.email,
   }) : super(key: key);
 
@@ -69,7 +61,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   void initState() {
     Future.microtask(() => context
         .read<ProductDetailsViewModel>()
-        .getAllColors(businessId: widget.businessId));
+        .getAllColors(businessId: widget.product.businessId));
     super.initState();
   }
 
@@ -87,13 +79,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => DetailScreen(
-                            image: '$url/${widget.image}',
+                            image: '$url/${widget.product.productProfileImg}',
                           )));
                 },
                 child: CachedNetworkImage(
                   width: 124,
                   height: 124,
-                  imageUrl: "$url/${widget.image}",
+                  imageUrl: "$url/${widget.product.productProfileImg}",
                   errorWidget: (BuildContext, String, dynamic) => Image.asset(
                     "assets/images/flora_cover.png",
                     fit: BoxFit.cover,
@@ -183,8 +175,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           children: [
             Text(
               translation(context).localeName == 'en'
-                  ? widget.name
-                  : widget.nameAR,
+                  ? widget.product.name
+                  : widget.product.nameEr,
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 22,
@@ -196,8 +188,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             ),
             Text(
               translation(context).localeName == 'en'
-                  ? widget.description
-                  : widget.descriptionAR,
+                  ? widget.product.description
+                  : widget.product.descriptionEr,
             ),
             const SizedBox(
               height: 10,
@@ -206,7 +198,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "${widget.price} JD",
+                  "${widget.product.price} JD",
                   style: const TextStyle(
                     color: Colors.black,
                     fontSize: 20,
@@ -333,13 +325,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             ? null
                             : cart.addItem(
                                 businessEmail: widget.email,
-                                productId: widget.productId.toString(),
-                                image: widget.productProfileImg,
-                                productPrice: widget.price,
-                                productName: widget.name,
+                                productId: widget.product.productId.toString(),
+                                image: widget.product.productProfileImg,
+                                productPrice: widget.product.price,
+                                productName: widget.product.name,
                                 color: '${productDetails.colorBouq}'
                                     .replaceFirst('#', ''),
-                                businessId: widget.businessId,
+                                businessId: widget.product.businessId,
                                 message: messageTextController.text,
                               );
                       },
@@ -371,7 +363,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           )),
                     )
                   : cart.item.values.toList().indexWhere((element) =>
-                              element.businessId == widget.businessId) ==
+                              element.businessId ==
+                              widget.product.businessId) ==
                           -1
                       ? InkWell(
                           onTap: () => showDialog<String>(
@@ -428,12 +421,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           onTap: () {
                             snackBar("Product add To cart ");
                             cart.addItem(
-                              productId: widget.productId.toString(),
-                              image: widget.productProfileImg,
-                              productPrice: widget.price,
-                              productName: widget.name,
+                              productId: widget.product.productId.toString(),
+                              image: widget.product.productProfileImg,
+                              productPrice: widget.product.price,
+                              productName: widget.product.name,
                               color: productDetails.colorBouq,
-                              businessId: widget.businessId,
+                              businessId: widget.product.businessId,
                               message: messageTextController.text,
                               businessEmail: widget.email,
                             );

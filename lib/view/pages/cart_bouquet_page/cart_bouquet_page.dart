@@ -432,6 +432,7 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                                       fontSize: 20,
                                     ),
                                   ),
+
                                   const SizedBox(
                                     height: 20,
                                   ),
@@ -450,13 +451,17 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                                           onPressed: () {
                                             if (_formKey.currentState!
                                                 .validate()) {
-                                              // cart.sendEmail(
-                                              //     toEmail:
-                                              //         "wardapplication2@gmail.com",
-                                              //     name: 'Flora Application',
-                                              //     email: "",
-                                              //     subject: "Orders",
-                                              //     message: 'message');
+                                              cart.sendEmail(
+                                                  toEmail: cart
+                                                      .bouquetList
+                                                      .values
+                                                      .first
+                                                      .businessEmail,
+                                                  name: 'Flora App',
+                                                  email:
+                                                      "wardapplication2@gmail.com",
+                                                  subject: "New Order",
+                                                  message: 'message');
                                               // cart.dbHelper.deleteAll();
 
                                               cart.currentStep = 0;

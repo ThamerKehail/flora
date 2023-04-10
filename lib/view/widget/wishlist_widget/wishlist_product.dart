@@ -34,65 +34,68 @@ class _WishlistProductState extends State<WishlistProduct> {
   @override
   Widget build(BuildContext context) {
     final wishlist = Provider.of<CartViewModel>(context);
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 90,
-              width: 90,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                  image: NetworkImage('$url/${widget.image}'),
-                  fit: BoxFit.cover,
+    return InkWell(
+      onTap: () {},
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 90,
+                width: 90,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  image: DecorationImage(
+                    image: NetworkImage('$url/${widget.image}'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  widget.name,
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.name,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  "Price: ${widget.productPrice.toString()} JD ",
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
+                  const SizedBox(
+                    height: 5,
                   ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                IconButton(
-                    onPressed: () {
-                      wishlist.removeWishItem(widget.productID);
-                    },
-                    icon: const Icon(Icons.delete)),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
-            )
-          ],
+                  Text(
+                    "Price: ${widget.productPrice.toString()} JD ",
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        wishlist.removeWishItem(widget.productID);
+                      },
+                      icon: const Icon(Icons.delete)),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

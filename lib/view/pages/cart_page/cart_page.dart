@@ -536,6 +536,7 @@ class _CartPageState extends State<CartPage> {
                                   const SizedBox(
                                     height: 20,
                                   ),
+
                                   Center(
                                     child: cart.pageLoading == true
                                         ? CircularProgressIndicator()
@@ -605,7 +606,15 @@ class _CartPageState extends State<CartPage> {
                                                     dataList: cart.cartProduct,
                                                     context: context,
                                                   );
-                                                  cart.setLoading(false);
+                                                  cart.sendEmail(
+                                                    name: 'Flora App',
+                                                    email:
+                                                        'wardapplication2@gmail.com',
+                                                    toEmail: cart.item.values
+                                                        .first.businessEmail,
+                                                    subject: "New Order",
+                                                    message: "message",
+                                                  );
                                                 },
                                                 child: Text(
                                                   translation(context).pay,

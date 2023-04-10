@@ -51,6 +51,7 @@ class WishlistViewModel with ChangeNotifier {
               color: existingCartItem.color,
               businessId: existingCartItem.businessId,
               message: existingCartItem.message,
+              businessEmail: existingCartItem.businessEmail,
             ));
   }
 
@@ -75,6 +76,7 @@ class WishlistViewModel with ChangeNotifier {
                 color: existingCartItem.color,
                 businessId: existingCartItem.businessId,
                 message: existingCartItem.message,
+                businessEmail: existingCartItem.businessEmail,
               ));
     } else {}
   }
@@ -87,6 +89,7 @@ class WishlistViewModel with ChangeNotifier {
     required String color,
     required int businessId,
     required String message,
+    required String businessEmail,
   }) {
     _item.putIfAbsent(
         productId,
@@ -99,6 +102,7 @@ class WishlistViewModel with ChangeNotifier {
               color: color,
               businessId: businessId,
               message: message,
+              businessEmail: businessEmail,
             ));
     print(_item);
     notifyListeners();
@@ -125,6 +129,7 @@ class WishlistViewModel with ChangeNotifier {
                 color: existingCartItem.color,
                 businessId: existingCartItem.businessId,
                 message: existingCartItem.message,
+                businessEmail: existingCartItem.businessEmail,
               ));
     } else {
       _item.remove(productId);

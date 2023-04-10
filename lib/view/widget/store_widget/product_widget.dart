@@ -39,17 +39,7 @@ class _ProductWidgetState extends State<ProductWidget> {
           context,
           MaterialPageRoute(
               builder: (context) => ProductDetailsPage(
-                    productProfileImg: widget.product.productProfileImg,
-                    index: widget.index,
-                    nameAR: widget.product.nameEr,
-                    name: widget.product.name,
-                    image: widget.product.productProfileImg,
-                    description: widget.product.description,
-                    descriptionAR: widget.product.descriptionEr,
-                    price: widget.product.price,
-                    colors: widget.product.allProductsBus!,
-                    businessId: widget.product.businessId,
-                    productId: widget.product.productId.toString(),
+                    product: widget.product,
                     email: widget.businessEmail,
                   )),
         );
@@ -216,6 +206,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                                   color: '0',
                                   businessId: widget.product.businessId,
                                   message: "Message not found",
+                                  businessEmail: widget.businessEmail,
                                 );
                               },
                               icon: Icon(

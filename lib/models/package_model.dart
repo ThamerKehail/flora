@@ -4,6 +4,7 @@ class Package {
   late final String nameEr;
   late final String description;
   late final String descriptionEr;
+  late final String businessEmail;
   dynamic price;
   late final int businessId;
   late final int state;
@@ -21,6 +22,7 @@ class Package {
     required this.state,
     required this.packageProfileImg,
     this.allPackageBus,
+    required this.businessEmail,
   });
 
   Package.fromJson(Map<String, dynamic> json) {

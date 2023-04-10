@@ -56,11 +56,11 @@ class _DefaultTabBarState extends State<DefaultTabBar> {
             unselectedLabelColor: Colors.black,
             indicatorColor: mainColor,
             tabs: [
-              Tab(text: translation(context).product),
+              Tab(text: translation(context).bouquet),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Tab(text: translation(context).bouquet),
+                  Tab(text: translation(context).product),
                   const SizedBox(
                     width: 5,
                   ),
@@ -174,6 +174,7 @@ class _DefaultTabBarState extends State<DefaultTabBar> {
                                         package: snapshot.data![i],
                                         index: i,
                                         colors: colors,
+                                        email: widget.businessEmail,
                                       )),
                                   i == snapshot.data!.length - 1
                                       ? const SizedBox(

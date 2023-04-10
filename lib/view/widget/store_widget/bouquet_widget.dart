@@ -13,13 +13,15 @@ import '../../pages/cart_page/cart_view_model.dart';
 
 class BouquetWidget extends StatefulWidget {
   final Package package;
+  final String email;
   int index;
   List colors;
   BouquetWidget(
       {Key? key,
       required this.package,
       required this.index,
-      required this.colors})
+      required this.colors,
+      required this.email})
       : super(key: key);
 
   @override
@@ -80,6 +82,7 @@ class _BouquetWidgetState extends State<BouquetWidget> {
                               productName: widget.package.name,
                               businessId: widget.package.businessId,
                               message: "",
+                              businessEmail: widget.email,
                             );
                           },
                           icon: Icon(
@@ -130,13 +133,15 @@ class _BouquetWidgetState extends State<BouquetWidget> {
                                 );
 
                                 cart.addBouquetItem(
-                                    productId:
-                                        widget.package.packageId.toString(),
-                                    image: widget.package.packageProfileImg,
-                                    productPrice: widget.package.price,
-                                    productName: widget.package.name,
-                                    businessId: widget.package.businessId,
-                                    message: '');
+                                  productId:
+                                      widget.package.packageId.toString(),
+                                  image: widget.package.packageProfileImg,
+                                  productPrice: widget.package.price,
+                                  productName: widget.package.name,
+                                  businessId: widget.package.businessId,
+                                  message: '',
+                                  businessEmail: widget.email,
+                                );
                               },
                               icon: Icon(
                                 Icons.shopping_cart,

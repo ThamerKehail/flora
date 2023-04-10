@@ -10,6 +10,7 @@ class WishlistProduct {
   final int businessId;
   final String color;
   final String message;
+  final String businessEmail;
   WishlistProduct({
     required this.image,
     required this.id,
@@ -19,6 +20,7 @@ class WishlistProduct {
     required this.color,
     required this.businessId,
     required this.message,
+    required this.businessEmail,
   });
   WishlistProduct.fromMap(Map<String, dynamic> res)
       : id = res['id'],
@@ -28,6 +30,7 @@ class WishlistProduct {
         quantity = res['quantity'],
         color = res['color'],
         businessId = res['businessId'],
+        businessEmail = res['businessEmail'],
         message = res['message'];
   Map<String, dynamic> toMap() {
     return {
@@ -38,6 +41,7 @@ class WishlistProduct {
       'quantity': quantity,
       'color': color,
       'businessId': businessId,
+      'businessEmail': businessEmail,
       'message': message,
     };
   }
