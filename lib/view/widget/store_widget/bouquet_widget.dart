@@ -10,6 +10,7 @@ import 'package:ward/view/pages/bouquet_details/bouquet_view_main.dart';
 import '../../../models/bouquet_product_model.dart';
 import '../../../utils/theme.dart';
 import '../../pages/cart_page/cart_view_model.dart';
+import '../../pages/product_details_page/product_details_view_model.dart';
 
 class BouquetWidget extends StatefulWidget {
   final Package package;
@@ -33,6 +34,7 @@ class _BouquetWidgetState extends State<BouquetWidget> {
   Widget build(BuildContext context) {
     final bouquet = Provider.of<BouquetViewModel>(context);
     final cart = Provider.of<CartViewModel>(context);
+    final productDetails = context.watch<ProductDetailsViewModel>();
 
     return InkWell(
       child: Card(
@@ -76,14 +78,14 @@ class _BouquetWidgetState extends State<BouquetWidget> {
                             );
 
                             cart.addBouquetItem(
-                              productId: widget.package.packageId.toString(),
-                              image: widget.package.packageProfileImg,
-                              productPrice: widget.package.price,
-                              productName: widget.package.name,
-                              businessId: widget.package.businessId,
-                              message: "",
-                              businessEmail: widget.email,
-                            );
+                                productId: widget.package.packageId.toString(),
+                                image: widget.package.packageProfileImg,
+                                productPrice: widget.package.price,
+                                productName: widget.package.name,
+                                businessId: widget.package.businessId,
+                                message: "",
+                                businessEmail: widget.email,
+                                color: '${productDetails.colorBouq}');
                           },
                           icon: Icon(
                             Icons.shopping_cart,
@@ -133,15 +135,15 @@ class _BouquetWidgetState extends State<BouquetWidget> {
                                 );
 
                                 cart.addBouquetItem(
-                                  productId:
-                                      widget.package.packageId.toString(),
-                                  image: widget.package.packageProfileImg,
-                                  productPrice: widget.package.price,
-                                  productName: widget.package.name,
-                                  businessId: widget.package.businessId,
-                                  message: '',
-                                  businessEmail: widget.email,
-                                );
+                                    productId:
+                                        widget.package.packageId.toString(),
+                                    image: widget.package.packageProfileImg,
+                                    productPrice: widget.package.price,
+                                    productName: widget.package.name,
+                                    businessId: widget.package.businessId,
+                                    message: '',
+                                    businessEmail: widget.email,
+                                    color: '${productDetails.colorBouq}');
                               },
                               icon: Icon(
                                 Icons.shopping_cart,

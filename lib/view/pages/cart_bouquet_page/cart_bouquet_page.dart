@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ward/utils/language_constant.dart';
 import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/cart_page/cart_view_model.dart';
@@ -32,6 +33,8 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
     super.initState();
     Future.microtask(() => context.read<CartViewModel>().getAllCartProducts());
   }
+
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +96,45 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                                               child: const Text("NEXT"),
                                             )
                                           : ElevatedButton(
-                                              onPressed: details.onStepContinue,
+                                              onPressed: cart.currentStep_ == 1
+                                                  ? () {
+                                                      if (formKey.currentState!
+                                                          .validate()) {
+                                                        cart
+                                                            .address(
+                                                              city: cart
+                                                                  .city.text,
+                                                              address: cart
+                                                                  .addressText
+                                                                  .text,
+                                                              streetName: cart
+                                                                  .street.text,
+                                                              building:
+                                                                  int.parse(cart
+                                                                      .building
+                                                                      .text),
+                                                              floor: int.parse(
+                                                                  cart.floor
+                                                                      .text),
+                                                              mobile: cart.phone
+                                                                      .text ??
+                                                                  "0785020222",
+                                                              note: cart
+                                                                  .note.text,
+                                                              userId: userId,
+                                                              status: 0,
+                                                              businessId: cart
+                                                                  .bouquetList
+                                                                  .values
+                                                                  .toList()[0]
+                                                                  .businessId,
+                                                            )
+                                                            .whenComplete(() =>
+                                                                details
+                                                                    .onStepContinue!());
+                                                      }
+                                                    }
+                                                  : details.onStepContinue,
                                               child: const Text("NEXT"),
                                             ),
                               const SizedBox(
@@ -113,73 +154,6 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                           title: Text(translation(context).cart),
                           content: Column(
                             children: [
-                              // FutureBuilder<List<CartProductModel>>(
-                              //     future: cart.cartProducts,
-                              //     builder: (context,
-                              //         AsyncSnapshot<List<CartProductModel>>
-                              //             snapshot) {
-                              //       if (snapshot.hasData) {
-                              //         if (snapshot.data!.isEmpty) {
-                              //           cart.isEmpty = true;
-                              //           return Column(
-                              //             crossAxisAlignment:
-                              //                 CrossAxisAlignment.center,
-                              //             mainAxisAlignment: MainAxisAlignment.center,
-                              //             children: [
-                              //               Image.asset(
-                              //                 "assets/images/Empty-Cart.jpg",
-                              //               ),
-                              //             ],
-                              //           );
-                              //         }
-                              //         cart.isEmpty = false;
-                              //         return Column(
-                              //           crossAxisAlignment: CrossAxisAlignment.end,
-                              //           children: [
-                              //             SizedBox(
-                              //               height:
-                              //                   MediaQuery.of(context).size.height *
-                              //                       snapshot.data!.length /
-                              //                       6,
-                              //               child: ListView.builder(
-                              //                 itemBuilder: (context, index) {
-                              //                   cart.businessId =
-                              //                       snapshot.data![index].businessId;
-                              //                   return CartWidget(
-                              //                     itemId: snapshot.data![index].id!,
-                              //                     id: snapshot.data![index].id!,
-                              //                     name: cart
-                              //                         .allCartProducts[index].name
-                              //                         .toString(),
-                              //                     description: "",
-                              //                     productPrice: snapshot
-                              //                         .data![index].price!
-                              //                         .toDouble(),
-                              //                     initialPrice: snapshot
-                              //                         .data![index].price!
-                              //                         .toDouble(),
-                              //                     image: snapshot.data![index]
-                              //                         .productProfileImg!,
-                              //                     qty: snapshot.data![index].qty!,
-                              //                     productID: snapshot
-                              //                         .data![index].productId
-                              //                         .toString(),
-                              //                     color: 0,
-                              //                     businessId: snapshot
-                              //                         .data![index].businessId!,
-                              //                     message: '',
-                              //                   );
-                              //                 },
-                              //                 itemCount: snapshot.data!.length,
-                              //               ),
-                              //             ),
-                              //           ],
-                              //         );
-                              //       } else if (snapshot.hasError) {
-                              //         print(snapshot.error);
-                              //       }
-                              //       return const CircularProgressIndicator();
-                              //     }),
                               SizedBox(
                                 child: ListView.builder(
                                   shrinkWrap: true,
@@ -284,7 +258,7 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                           title: Text(translation(context).address),
                           content: SingleChildScrollView(
                             child: Form(
-                              key: _formKey,
+                              key: formKey,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -448,114 +422,127 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                                                           10)),
                                               elevation: 0,
                                               primary: mainColor),
-                                          onPressed: () {
-                                            if (_formKey.currentState!
-                                                .validate()) {
-                                              cart.sendEmail(
-                                                  toEmail: cart
-                                                      .bouquetList
-                                                      .values
-                                                      .first
-                                                      .businessEmail,
-                                                  name: 'Flora App',
-                                                  email:
-                                                      "wardapplication2@gmail.com",
-                                                  subject: "New Order",
-                                                  message: 'message');
-                                              // cart.dbHelper.deleteAll();
+                                          onPressed: () async {
+                                            // cart.dbHelper.deleteAll();
 
-                                              cart.currentStep = 0;
-                                              cart.activeStep = 0;
-                                              cart.currentStep_ = 0;
-                                              cart.address(
-                                                city: cart.city.text,
-                                                address: cart.addressText.text,
-                                                streetName: cart.street.text,
-                                                building: int.parse(
-                                                    cart.building.text),
-                                                floor:
-                                                    int.parse(cart.floor.text),
-                                                mobile: cart.phone.text,
-                                                userId: userId,
-                                                businessId: cart
-                                                    .bouquetList.values
-                                                    .toList()[0]
-                                                    .businessId,
-                                                status: 0,
-                                                note: cart.note.text,
-                                              );
+                                            cart.currentStep = 0;
+                                            cart.activeStep = 0;
+                                            cart.currentStep_ = 0;
+                                            // cart.address(
+                                            //   city: cart.city.text,
+                                            //   address: cart.addressText.text,
+                                            //   streetName: cart.street.text,
+                                            //   building: int.parse(
+                                            //       cart.building.text),
+                                            //   floor:
+                                            //       int.parse(cart.floor.text),
+                                            //   mobile: cart.phone.text,
+                                            //   userId: userId,
+                                            //   businessId: cart
+                                            //       .bouquetList.values
+                                            //       .toList()[0]
+                                            //       .businessId,
+                                            //   status: 0,
+                                            //   note: cart.note.text,
+                                            // );
+                                            SharedPreferences prefs =
+                                                await SharedPreferences
+                                                    .getInstance();
 
-                                              Future.delayed(
-                                                  const Duration(seconds: 3),
-                                                  () {
-                                                cart.bouquetList.values
-                                                    .toList()
-                                                    .forEach((element) async {
-                                                  await cart
-                                                      .ordersDetails(
-                                                        businessId:
-                                                            element.businessId,
-                                                        paymentMethod: 1,
-                                                        productId: 5,
-                                                        qty: element.quantity
-                                                            .toDouble(),
-                                                        singlePrice: element
-                                                            .productPrice
-                                                            .toDouble(),
-                                                        totalPrice: (element
-                                                                    .quantity *
-                                                                element
-                                                                    .productPrice)
-                                                            .toDouble(),
-                                                        color:
-                                                            widget.currentColor,
-                                                        message: widget.message,
-                                                        type: 1,
-                                                        name:
-                                                            element.productName,
-                                                        image: element.image,
-                                                        context: context,
-                                                      )
-                                                      .whenComplete(() =>
-                                                          cart.clearBouquet());
-                                                });
-                                                cart.phone.clear();
-                                                cart.note.clear();
-                                                cart.city.clear();
-                                                cart.addressText.clear();
-                                                cart.street.clear();
-                                                cart.building.clear();
-                                                cart.floor.clear();
+                                            cart.bouquetList.values
+                                                .toList()
+                                                .forEach((element) async {
+                                              cart.cartBouqet.add({
+                                                'order_id':
+                                                    '${prefs.getInt('order_id')}',
+                                                'business_id':
+                                                    element.businessId,
+                                                'userID': userId,
+                                                'payment_method': 2,
+                                                'product_id': element.packageID,
+                                                'Qty': element.quantity,
+                                                'single_price':
+                                                    element.productPrice,
+                                                'total_price':
+                                                    (element.productPrice *
+                                                        element.quantity),
+                                                'color': '${element.color}',
+                                                'image': element.image,
+                                                'name': element.productName,
+                                                'message': element.message,
+                                                'type': '1',
                                               });
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                      MaterialPageRoute(
-                                                          builder: (_) =>
-                                                              SuccessPage()));
-
-                                              // Navigator.of(context).pushNamed(
-                                              //     AppRoutes.mainHomeScreen);
-                                            } else
-                                              showDialog<String>(
+                                              print(
+                                                  "==================cart===============");
+                                              print(cart.cartBouqet.length);
+                                              print(cart.cartBouqet);
+                                              cart.ordersDetails(
+                                                dataList: cart.cartBouqet,
                                                 context: context,
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        AlertDialog(
-                                                  title: const Text(
-                                                      'Address is Required'),
-                                                  content: const Text(
-                                                      'Please back and fill address'),
-                                                  actions: <Widget>[
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.pop(
-                                                            context, 'OK');
-                                                      },
-                                                      child: const Text('OK'),
-                                                    ),
-                                                  ],
-                                                ),
                                               );
+                                              // cart.ordersDetails(
+                                              //   dataList: cart.cartBouqet,
+                                              //   context: context,
+                                              // );
+                                              // cart.sendEmail(
+                                              //     toEmail: cart
+                                              //         .bouquetList
+                                              //         .values
+                                              //         .first
+                                              //         .businessEmail,
+                                              //     name: 'Flora App',
+                                              //     email:
+                                              //         "wardapplication2@gmail.com",
+                                              //     subject: "New Order",
+                                              //     message: 'message');
+                                              // await cart.ordersDetails(
+                                              //   businessId: element.businessId,
+                                              //   paymentMethod: 1,
+                                              //   productId:
+                                              //       int.parse(element.id),
+                                              //   qty:
+                                              //       element.quantity.toDouble(),
+                                              //   singlePrice: element
+                                              //       .productPrice
+                                              //       .toDouble(),
+                                              //   totalPrice: (element.quantity *
+                                              //           element.productPrice)
+                                              //       .toDouble(),
+                                              //   color: widget.currentColor,
+                                              //   message: widget.message,
+                                              //   type: 1,
+                                              //   name: element.productName,
+                                              //   image: element.image,
+                                              //   context: context,
+                                              // );
+                                              // .whenComplete(() =>
+                                              //     cart.clearBouquet());
+                                            });
+                                            cart.sendEmail(
+                                              name: 'Flora App',
+                                              email:
+                                                  'wardapplication2@gmail.com',
+                                              toEmail: cart.bouquetList.values
+                                                  .first.businessEmail,
+                                              subject: "New Order",
+                                              message: "message",
+                                            );
+                                            cart.phone.clear();
+                                            cart.note.clear();
+                                            cart.city.clear();
+                                            cart.addressText.clear();
+                                            cart.street.clear();
+                                            cart.building.clear();
+                                            cart.floor.clear();
+
+                                            Navigator.of(context)
+                                                .pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            SuccessPage()));
+
+                                            // Navigator.of(context).pushNamed(
+                                            //     AppRoutes.mainHomeScreen);
                                           },
                                           child: Text(
                                             translation(context).pay,

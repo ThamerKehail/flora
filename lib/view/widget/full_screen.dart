@@ -6,7 +6,9 @@ class DetailScreen extends StatelessWidget {
   DetailScreen({required this.image});
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.height * .3, horizontal: 25),
       child: InteractiveViewer(
         clipBehavior: Clip.none,
         child: ClipRRect(

@@ -53,6 +53,7 @@ class CartViewModel with ChangeNotifier {
   }
 
   List<Map<String, dynamic>> cartProduct = [];
+  List<Map<String, dynamic>> cartBouqet = [];
   void addWishItem({
     required String productId,
     required String image,
@@ -147,6 +148,8 @@ class CartViewModel with ChangeNotifier {
               businessId: existingCartItem.businessId,
               message: existingCartItem.message,
               businessEmail: existingCartItem.businessEmail,
+              color: existingCartItem.color,
+              packageID: productId,
             ));
     notifyListeners();
   }
@@ -205,6 +208,7 @@ class CartViewModel with ChangeNotifier {
     required String message,
     required int businessId,
     required String businessEmail,
+    required String color,
   }) {
     if (_bouquetList.containsKey(productId)) {
       _bouquetList.update(
@@ -218,6 +222,8 @@ class CartViewModel with ChangeNotifier {
                 businessId: existingCartItem.businessId,
                 message: existingCartItem.message,
                 businessEmail: existingCartItem.businessEmail,
+                color: existingCartItem.color,
+                packageID: productId,
               ));
       print(_bouquetList);
     } else {
@@ -232,6 +238,8 @@ class CartViewModel with ChangeNotifier {
                 businessId: businessId,
                 message: message,
                 businessEmail: businessEmail,
+                color: color,
+                packageID: productId,
               ));
       print(_item);
     }
@@ -289,6 +297,8 @@ class CartViewModel with ChangeNotifier {
                 businessId: existingCartItem.businessId,
                 message: existingCartItem.message,
                 businessEmail: existingCartItem.businessEmail,
+                color: existingCartItem.color,
+                packageID: existingCartItem.packageID,
               ));
     } else {
       _bouquetList.remove(productId);
@@ -403,34 +413,12 @@ class CartViewModel with ChangeNotifier {
   }
 
   Future ordersDetails({
-    required int businessId,
-    required int paymentMethod,
-    required int productId,
-    required double qty,
-    required double singlePrice,
-    required double totalPrice,
-    required String color,
-    required String message,
-    required int type,
-    required String name,
-    required String image,
     List? dataList,
     required BuildContext context,
   }) async {
     pageLoading = true;
     notifyListeners();
     ordersDetailsRepository.ordersDetails(
-      businessId: businessId,
-      paymentMethod: paymentMethod,
-      productId: productId,
-      qty: qty.toDouble(),
-      singlePrice: singlePrice,
-      totalPrice: totalPrice,
-      color: color,
-      message: message,
-      type: type,
-      image: image,
-      name: name,
       dataList: dataList!,
       context: context,
     );

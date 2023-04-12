@@ -9,17 +9,6 @@ class OrdersDetailsApi {
   late final DioClient dioClient;
   OrdersDetailsApi(this.dioClient);
   Future orderDetails({
-    required int businessId,
-    required int paymentMethod,
-    required int productId,
-    required double qty,
-    required double singlePrice,
-    required double totalPrice,
-    required String color,
-    required String message,
-    required String name,
-    required String image,
-    required int type,
     required List dataList,
     required BuildContext context,
   }) async {

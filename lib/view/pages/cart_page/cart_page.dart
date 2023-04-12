@@ -116,6 +116,17 @@ class _CartPageState extends State<CartPage> {
                 Image.asset(
                   "assets/images/Empty-Cart.jpg",
                 ),
+                ElevatedButton(
+                    onPressed: () {
+                      cart.sendEmail(
+                        name: 'Flora App',
+                        email: 'wardapplication2@gmail.com',
+                        toEmail: 'thamerkehail.tk@gmail.com',
+                        subject: "New Order",
+                        message: "message",
+                      );
+                    },
+                    child: Text("Send Email")),
               ],
             )
           : Column(
@@ -592,17 +603,6 @@ class _CartPageState extends State<CartPage> {
                                                   print(cart.cartProduct);
 
                                                   cart.ordersDetails(
-                                                    businessId: 1,
-                                                    paymentMethod: 1,
-                                                    productId: 1,
-                                                    qty: 1,
-                                                    singlePrice: 1,
-                                                    totalPrice: 1,
-                                                    color: '1',
-                                                    message: 'message',
-                                                    type: 1,
-                                                    name: 'name',
-                                                    image: 'image',
                                                     dataList: cart.cartProduct,
                                                     context: context,
                                                   );
