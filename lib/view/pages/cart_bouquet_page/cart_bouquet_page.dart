@@ -210,7 +210,7 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                                       ReusableWidget(
                                           title: translation(context).subtotal,
                                           value:
-                                              "${value.totalAmount.toStringAsFixed(2)} JD"),
+                                              "${value.totalBouquetAmount.toStringAsFixed(2)} JD"),
                                       const SizedBox(
                                         height: 15,
                                       ),

@@ -67,28 +67,39 @@ class _ProfilePageState extends State<ProfilePage> {
                                 fit: BoxFit.fitWidth)),
                       );
                     }
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        ProfileWidget(
-                          imagePath: snapshot.data![0].profileImage == 'na'
-                              ? 'https://cdn-icons-png.flaticon.com/512/3024/3024605.png'
-                              : "https://www.florajo.com/assets/images/users/${snapshot.data![0].profileImage}",
-                          onClicked: () async {
-                            await Navigator.of(context).push(
-                              MaterialPageRoute(
-                                  builder: (context) => EditProfilePage()),
-                            );
-                          },
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        buildName(
-                            email: snapshot.data![0].email!,
-                            name:
-                                "${snapshot.data![0].fname!} ${snapshot.data![0].lname}"),
-                      ],
+                    return InkWell(
+                      onTap: () async {
+                        await Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => EditProfilePage(
+                                    fName: "${snapshot.data![0].fname!}",
+                                    lName: "${snapshot.data![0].lname!}",
+                                    email: snapshot.data![0].email!,
+                                    image: snapshot.data![0].profileImage ==
+                                            'na'
+                                        ? 'https://cdn-icons-png.flaticon.com/512/3024/3024605.png'
+                                        : "https://www.florajo.com/assets/images/users/${snapshot.data![0].profileImage}",
+                                  )),
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ProfileWidget(
+                            imagePath: snapshot.data![0].profileImage == 'na'
+                                ? 'https://cdn-icons-png.flaticon.com/512/3024/3024605.png'
+                                : "https://www.florajo.com/assets/images/users/${snapshot.data![0].profileImage}",
+                            onClicked: () {},
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          buildName(
+                              email: snapshot.data![0].email!,
+                              name:
+                                  "${snapshot.data![0].fname!} ${snapshot.data![0].lname}"),
+                        ],
+                      ),
                     );
                   }),
               const SizedBox(
@@ -98,19 +109,19 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: Colors.grey,
                 thickness: 1,
               ),
-              const SizedBox(
-                height: 35,
-              ),
-              userId == 0
-                  ? SizedBox()
-                  : ProfileIconWidget(
-                      image: "assets/images/settings.png",
-                      text: translation(context).editProfile,
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => EditProfilePage()));
-                      },
-                    ),
+
+              // userId == 0
+              //     ? SizedBox()
+              //     : ProfileIconWidget(
+              //         image: "assets/images/settings.png",
+              //         text: translation(context).editProfile,
+              //         onTap: () {
+              //           Navigator.of(context).push(MaterialPageRoute(
+              //               builder: (context) => EditProfilePage(
+              //                 fName: "${snapshot.data![0].fname!}",
+              //               )));
+              //         },
+              //       ),
               userId == 0
                   ? SizedBox()
                   : const SizedBox(
