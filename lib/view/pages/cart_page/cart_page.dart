@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paytabs_bridge/BaseBillingShippingInfo.dart';
 import 'package:flutter_paytabs_bridge/IOSThemeConfiguration.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkApms.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkConfigurationDetails.dart';
-import 'package:flutter_paytabs_bridge/PaymentSdkLocale.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkTokeniseType.dart';
 import 'package:flutter_paytabs_bridge/flutter_paytabs_bridge.dart';
 import 'package:provider/provider.dart';
@@ -13,12 +11,12 @@ import 'package:ward/utils/language_constant.dart';
 import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/cart_page/cart_view_model.dart';
 import 'package:ward/view/widget/cart_widget/cart_widget.dart';
+
 import '../../../utils/const.dart';
 import '../../widget/cart_widget/payment/delivery_container_widget.dart';
 import '../../widget/cart_widget/reusable_widget.dart';
 import '../../widget/checkout_widget/text_field.dart';
 import '../../widget/text_utils.dart';
-import '../Success_page/successs_page.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);

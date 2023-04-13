@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:ward/models/order_history.dart';
 import 'package:ward/utils/const.dart';
 import 'package:ward/view/pages/order_history_page/order_history_view_model.dart';
-import 'package:ward/view/widget/order_history_widget/build_rating.dart';
 
 class CardHistoryWidget extends StatefulWidget {
   final Orders orders;
@@ -26,16 +25,25 @@ class _CardHistoryWidgetState extends State<CardHistoryWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              height: 90,
-              width: 90,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-                  image: NetworkImage(widget.orders.type == 1
-                      ? '$url/${widget.orders.image!}'
-                      : '$url/${widget.orders.image!}'),
-                  fit: BoxFit.cover,
+            InkWell(
+              onTap: () {
+                print('$url/${widget.orders.image!}'
+                    .replaceAll("\n", '')
+                    .toString()
+                    .replaceAll(" ", ''));
+              },
+              child: Container(
+                height: 90,
+                width: 90,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  image: DecorationImage(
+                    image: NetworkImage('$url/${widget.orders.image!}'
+                        .replaceAll("\n", '')
+                        .toString()
+                        .replaceAll(" ", '')),
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

@@ -58,7 +58,7 @@ class BalloonsPlacesWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {
-          !(now.hour >= int.parse(allPlaces.from.toString().split(':')[0]) &&
+          (now.hour >= int.parse(allPlaces.from.toString().split(':')[0]) &&
                   now.hour < int.parse(allPlaces.to.toString().split(':')[0]))
               ? Navigator.push(
                   context,
