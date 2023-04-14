@@ -12,10 +12,8 @@ import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/wishlist_page/wishlist_page.dart';
 import 'package:ward/view/pages/wishlist_page/wishlist_view_model.dart';
 import 'package:ward/view/widget/home_widget/card_picks_widget.dart';
-import 'package:ward/view/widget/home_widget/card_places.dart';
 import 'package:ward/view/widget/home_widget/category_card.dart';
 
-import '../../../models/all_places_model.dart';
 import '../../../models/user_model.dart';
 import '../../widget/home_widget/carsousel.dart';
 import '../Flower_places_page/Flower_places_view_model.dart';
@@ -261,16 +259,14 @@ class _HomePageState extends State<HomePage> {
                           const SizedBox(
                             width: 20,
                           ),
-                          Expanded(
-                            child: CardPicksWidget(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .pushNamed(AppRoutes.aboutUsScreen);
-                              },
-                              text:
-                                  "${translation(context).about} \n ${translation(context).us}",
-                              image: "assets/images/team.png",
-                            ),
+                          CardPicksWidget(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed(AppRoutes.aboutUsScreen);
+                            },
+                            text:
+                                "${translation(context).about} \n ${translation(context).us}",
+                            image: "assets/images/team.png",
                           ),
                         ],
                       ),

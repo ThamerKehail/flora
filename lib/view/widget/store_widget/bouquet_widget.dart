@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ward/dio/bouquet_db_helper/bouquet_db_helper.dart';
-import 'package:ward/models/bouquet.dart';
 import 'package:ward/models/package_model.dart';
 import 'package:ward/utils/const.dart';
-import 'package:ward/utils/language_constant.dart';
 import 'package:ward/view/pages/bouquet_details/bouquet_view_main.dart';
 
-import '../../../models/bouquet_product_model.dart';
+import '../../../utils/routes.dart';
 import '../../../utils/theme.dart';
 import '../../pages/cart_page/cart_view_model.dart';
 import '../../pages/product_details_page/product_details_view_model.dart';
@@ -70,22 +67,48 @@ class _BouquetWidgetState extends State<BouquetWidget> {
                   cart.bouquetList.isEmpty
                       ? IconButton(
                           onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Product add To Bouquet'),
-                                duration: const Duration(seconds: 2),
-                              ),
-                            );
+                            userId == 0
+                                ? showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      title: const Text(
+                                          'You cannot add the product'),
+                                      content: const Text(
+                                          'To add a product, you must log in'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'Cancel'),
+                                          child: const Text('Cancel'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () => Navigator.pushNamed(
+                                              context, AppRoutes.loginScreen),
+                                          child: const Text('Login'),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('Product add To Bouquet'),
+                                      duration: const Duration(seconds: 2),
+                                    ),
+                                  );
 
-                            cart.addBouquetItem(
-                                productId: widget.package.packageId.toString(),
-                                image: widget.package.packageProfileImg,
-                                productPrice: widget.package.price,
-                                productName: widget.package.name,
-                                businessId: widget.package.businessId,
-                                message: "",
-                                businessEmail: widget.email,
-                                color: '${productDetails.colorBouq}');
+                            userId == 0
+                                ? null
+                                : cart.addBouquetItem(
+                                    productId:
+                                        widget.package.packageId.toString(),
+                                    image: widget.package.packageProfileImg,
+                                    productPrice: widget.package.price,
+                                    productName: widget.package.name,
+                                    businessId: widget.package.businessId,
+                                    message: "",
+                                    businessEmail: widget.email,
+                                    color: '${productDetails.colorBouq}');
                           },
                           icon: Icon(
                             Icons.shopping_cart,

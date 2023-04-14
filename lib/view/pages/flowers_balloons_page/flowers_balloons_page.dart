@@ -2,13 +2,12 @@ import 'package:badges/badges.dart' as badge;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ward/models/flowers_balloons_banner_model.dart';
-import 'package:ward/models/place_details_model.dart';
 import 'package:ward/utils/routes.dart';
 import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/flowers_balloons_page/search_flowers_balloons_page/search_flower_balloons_page.dart';
 import 'package:ward/view/widget/balloons_widget/balloons_widget.dart';
+
 import '../../../models/all_places_model.dart';
-import '../../../models/flowers_balloons_model.dart';
 import '../../../utils/const.dart';
 import '../../../utils/language_constant.dart';
 import '../../widget/home_widget/carsousel.dart';
@@ -138,8 +137,8 @@ class _FlowerAndBalloonsPlacesState extends State<FlowerAndBalloonsPlaces> {
                     var products = snapshot.data!;
 
                     for (var element in products) {
-                      flowersBalloons.bannerImg.add(
-                          "http://www.florajo.com//assets/img/banner/${element.bannerImg}");
+                      flowersBalloons.bannerImg
+                          .add("$url/${element.bannerImg}");
                     }
                     return CarouselWithDotsPage(
                       imgList: flowersBalloons.bannerImg,
@@ -222,8 +221,7 @@ class _FlowerAndBalloonsPlacesState extends State<FlowerAndBalloonsPlaces> {
                             // to: flowersBalloons.placesNearMe[index].to
                             //     .toString(),
                             // email: flowersBalloons.placesNearMe[index].email,
-allPlaces: flowersBalloons.resultPlaces![index],
-
+                            allPlaces: flowersBalloons.resultPlaces![index],
                           );
                         });
                   })

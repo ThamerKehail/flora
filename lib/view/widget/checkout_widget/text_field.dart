@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../utils/theme.dart';
 
@@ -8,6 +9,7 @@ class TextFieldWidget extends StatefulWidget {
   final Function validator;
   final TextInputType textType;
   final TextEditingController textEditingController;
+  final List<TextInputFormatter>? inputFormatters;
   const TextFieldWidget({
     Key? key,
     required this.label,
@@ -15,6 +17,7 @@ class TextFieldWidget extends StatefulWidget {
     required this.textEditingController,
     required this.textType,
     required this.validator,
+    this.inputFormatters,
   }) : super(key: key);
 
   @override
@@ -37,6 +40,10 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           height: 8,
         ),
         TextFormField(
+          inputFormatters: [],
+          // inputFormatters: <TextInputFormatter>[
+          //   FilteringTextInputFormatter.allow(RegExp('[0-9۰-۹]')),
+          // ],
           controller: widget.textEditingController,
           textInputAction: TextInputAction.next,
           validator: (value) => widget.validator(value),
