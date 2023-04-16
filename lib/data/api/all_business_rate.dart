@@ -8,7 +8,7 @@ class AllBusinessRateApi {
   AllBusinessRateApi(this.dioClient);
   Future<List<AllBusinessRate>> getAllBusinessRate() async {
     try {
-      final response = await dioClient.dio.get('api/orders_rate/54');
+      final response = await dioClient.dio.get('api/orders_rate/$userId');
       var data = AllBusinessRate.asListFromJson(response.data);
       print(data);
       return data;
