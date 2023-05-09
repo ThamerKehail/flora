@@ -38,10 +38,12 @@ class _CardHistoryWidgetState extends State<CardHistoryWidget> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
-                    image: NetworkImage('$url/${widget.orders.image!}'
-                        .replaceAll("\n", '')
-                        .toString()
-                        .replaceAll(" ", '')),
+                    image: NetworkImage(widget.orders.packageId != null
+                        ? '$url/${widget.orders.packegeDetail![0].packageProfileImg!}'
+                        : '$url/${widget.orders.productDetail![0].productProfileImg!}'
+                            .replaceAll("\n", '')
+                            .toString()
+                            .replaceAll(" ", '')),
                     fit: BoxFit.cover,
                   ),
                 ),

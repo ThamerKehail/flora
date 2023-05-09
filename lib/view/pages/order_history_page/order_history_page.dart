@@ -68,7 +68,6 @@ class _OrderHistoryState extends State<OrderHistory> {
                   return Center(
                     child: Image.asset('assets/images/nproduct.png'),
                   );
-                  ;
                 }
 
                 return (snapshot.hasData)

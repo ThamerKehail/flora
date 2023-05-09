@@ -14,6 +14,7 @@ import '../../../data/repositories/avg_business_repository.dart';
 import '../../../data/repositories/package_repository.dart';
 import '../../../data/repositories/product_repositories.dart';
 import '../../../dio/dio_client.dart';
+import '../../../utils/language_constant.dart';
 import '../../pages/bouquet_details/bouquet_view_main.dart';
 import '../../pages/store_page/store_page.dart';
 import '../../pages/store_page/store_view_model.dart';
@@ -161,7 +162,10 @@ class BalloonsPlacesWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment:
+                          translation(context).localeName == 'en'
+                              ? CrossAxisAlignment.start
+                              : CrossAxisAlignment.end,
                       children: [
                         Text(
                           allPlaces.fname! + allPlaces.lname.toString() ?? "",

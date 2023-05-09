@@ -55,14 +55,20 @@ class _ProductWidgetState extends State<ProductWidget> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
-                    child: Text(
-                      translation(context).localeName == 'en'
-                          ? widget.product.name
-                          : widget.product.nameEr,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                    child: Flexible(
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.height * .23,
+                        child: Text(
+                          translation(context).localeName == 'en'
+                              ? widget.product.name
+                              : widget.product.nameEr,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ),
                   ),

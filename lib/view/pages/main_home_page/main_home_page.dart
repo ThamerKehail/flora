@@ -25,6 +25,7 @@ class _MainHomepageState extends State<MainHomepage> {
 
   @override
   Widget build(BuildContext context) {
+    print("///////$userId//////////");
     final mainHomePageModel = context.watch<MainHomeViewModel>();
 
     return Scaffold(

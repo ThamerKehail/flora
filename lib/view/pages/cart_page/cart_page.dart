@@ -581,6 +581,7 @@ class _CartPageState extends State<CartPage> {
                                                       'message':
                                                           element.message,
                                                       'type': '1',
+                                                      'package_id': '0',
                                                     });
                                                   });
                                                   print(

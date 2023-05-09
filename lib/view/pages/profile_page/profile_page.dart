@@ -78,7 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     image: snapshot.data![0].profileImage ==
                                             'na'
                                         ? 'https://cdn-icons-png.flaticon.com/512/3024/3024605.png'
-                                        : "https://www.florajo.com/assets/images/users/${snapshot.data![0].profileImage}",
+                                        : "https://www.florajo.com/uploads/${snapshot.data![0].profileImage}",
                                   )),
                         );
                       },
@@ -88,7 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ProfileWidget(
                             imagePath: snapshot.data![0].profileImage == 'na'
                                 ? 'https://cdn-icons-png.flaticon.com/512/3024/3024605.png'
-                                : "https://www.florajo.com/assets/images/users/${snapshot.data![0].profileImage}",
+                                : "https://www.florajo.com/uploads/${snapshot.data![0].profileImage}",
                             onClicked: () {},
                           ),
                           const SizedBox(

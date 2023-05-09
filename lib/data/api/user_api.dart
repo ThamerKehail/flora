@@ -8,7 +8,7 @@ class UserApi {
   UserApi(this.dioClient);
   Future<List<Client>> getUserInfo() async {
     try {
-      print('/////////////////////////////////////////');
+      print('/////////////////$userId////////////////////////');
       print(userId);
       final response = await dioClient.dio.get('api/User/$userId');
       print(response.data);

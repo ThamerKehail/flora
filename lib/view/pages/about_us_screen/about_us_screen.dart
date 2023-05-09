@@ -60,7 +60,7 @@ class AboutUsScreen extends StatelessWidget {
                         width: 10,
                       ),
                       const Text(
-                        "962 78 600 78 14",
+                        "962 7 9832 7199",
                         style: TextStyle(
                           color: Color(0xff166d5d),
                           fontSize: 22,
@@ -90,7 +90,7 @@ class AboutUsScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: const Text(
-                          "wardapplication2@gmail.com",
+                          "Flora.jo962@gmail.com",
                           style: TextStyle(
                             color: Color(0xff166d5d),
                             fontSize: 18,

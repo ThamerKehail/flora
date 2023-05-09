@@ -15,21 +15,22 @@ import '../full_screen.dart';
 class BouquetWidget extends StatefulWidget {
   final String image;
   final String name;
+
   final int qty;
   final double price;
   final String packageId;
   final String id;
   final double initPrice;
-  const BouquetWidget(
-      {Key? key,
-      required this.image,
-      required this.name,
-      required this.qty,
-      required this.price,
-      required this.packageId,
-      required this.id,
-      required this.initPrice})
-      : super(key: key);
+  const BouquetWidget({
+    Key? key,
+    required this.image,
+    required this.name,
+    required this.qty,
+    required this.price,
+    required this.packageId,
+    required this.id,
+    required this.initPrice,
+  }) : super(key: key);
 
   @override
   State<BouquetWidget> createState() => _BouquetWidgetState();
