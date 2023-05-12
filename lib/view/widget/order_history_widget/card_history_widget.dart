@@ -38,7 +38,7 @@ class _CardHistoryWidgetState extends State<CardHistoryWidget> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   image: DecorationImage(
-                    image: NetworkImage(widget.orders.packageId != null
+                    image: NetworkImage(widget.orders.productId == 0
                         ? '$url/${widget.orders.packegeDetail![0].packageProfileImg!}'
                         : '$url/${widget.orders.productDetail![0].productProfileImg!}'
                             .replaceAll("\n", '')

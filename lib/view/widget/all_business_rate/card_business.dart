@@ -66,7 +66,7 @@ class _CardHistoryWidgetState extends State<CardBusinessWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            '${widget.allBusinessRate.ordersCheack![0].fname!} ${widget.allBusinessRate.ordersCheack![0].lname}',
+                            '${widget.allBusinessRate.ordersCheack![0].fname!} ${widget.allBusinessRate.ordersCheack?[0].lname ?? ""}',
                             maxLines: 1,
                             style: const TextStyle(
                               color: Colors.black,

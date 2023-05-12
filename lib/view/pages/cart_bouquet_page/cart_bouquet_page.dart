@@ -459,7 +459,7 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                                                     element.businessId,
                                                 'userID': userId,
                                                 'payment_method': 2,
-                                                'product_id': element.packageID,
+                                                'product_id': '0',
                                                 'Qty': element.quantity,
                                                 'single_price':
                                                     element.productPrice,
@@ -471,6 +471,7 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                                                 'name': element.productName,
                                                 'message': element.message,
                                                 'type': '1',
+                                                'package_id': element.packageID,
                                               });
                                               print(
                                                   "==================cart===============");

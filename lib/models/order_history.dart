@@ -149,16 +149,16 @@
 //   }
 // }
 class Orders {
-  int? id;
-  int? orderId;
-  int? businessId;
-  int? userID;
-  int? paymentMethod;
-  int? productId;
-  int? packageId;
-  int? qty;
-  int? singlePrice;
-  double? totalPrice;
+  num? id;
+  num? orderId;
+  num? businessId;
+  num? userID;
+  num? paymentMethod;
+  num? productId;
+  num? packageId;
+  num? qty;
+  num? singlePrice;
+  num? totalPrice;
   String? color;
   String? image;
   String? name;
@@ -274,16 +274,16 @@ class Orders {
 }
 
 class OrdersAddres {
-  int? orderId;
+  num? orderId;
   String? city;
   String? address;
   String? strretName;
-  int? building;
-  int? floor;
+  num? building;
+  num? floor;
   String? mobile;
-  int? userId;
-  int? businessId;
-  int? status;
+  num? userId;
+  num? businessId;
+  num? status;
 
   OrdersAddres(
       {this.orderId,
@@ -327,14 +327,14 @@ class OrdersAddres {
 }
 
 class ProductDetail {
-  int? productId;
+  num? productId;
   String? name;
   String? nameEr;
   String? description;
   String? descriptionEr;
-  double? price;
-  int? businessId;
-  int? state;
+  num? price;
+  num? businessId;
+  num? state;
   String? productProfileImg;
 
   ProductDetail(
@@ -376,14 +376,14 @@ class ProductDetail {
 }
 
 class PackageDetail {
-  int? packageId;
+  num? packageId;
   String? name;
   String? nameEr;
   String? description;
   String? descriptionEr;
   double? price;
-  int? businessId;
-  int? state;
+  num? businessId;
+  num? state;
   String? packageProfileImg;
 
   PackageDetail(

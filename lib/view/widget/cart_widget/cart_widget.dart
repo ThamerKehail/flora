@@ -48,6 +48,7 @@ class _CartWidgetState extends State<CartWidget> {
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<CartViewModel>(context);
+    print('$url/${widget.image}');
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -59,17 +60,16 @@ class _CartWidgetState extends State<CartWidget> {
               height: 90,
               width: 90,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                 ),
-              child:  CachedNetworkImage(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: CachedNetworkImage(
                 width: 124,
                 height: 124,
                 imageUrl: '$url/${widget.image}',
-                errorWidget: (BuildContext, String, dynamic) =>
-                    Image.asset(
-                      "assets/images/flora_cover.png",
-                      fit: BoxFit.cover,
-                    ),
+                errorWidget: (BuildContext, String, dynamic) => Image.asset(
+                  "assets/images/flora_cover.png",
+                  fit: BoxFit.cover,
+                ),
                 fit: BoxFit.cover,
               ),
             ),
