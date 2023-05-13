@@ -21,6 +21,7 @@ class OtpScreen extends StatefulWidget {
 
 class _OtpScreenState extends State<OtpScreen> {
   final FirebaseAuth auth = FirebaseAuth.instance;
+
   final formKey = GlobalKey<FormState>();
   StreamController<ErrorAnimationType>? errorController;
   TextEditingController textEditingController = TextEditingController();

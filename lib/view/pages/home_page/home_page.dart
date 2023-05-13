@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ward/models/banner.dart';
@@ -93,7 +92,6 @@ class _HomePageState extends State<HomePage> {
     final homeModel = context.watch<HomeViewModel>();
     final places = context.watch<AllPlacesViewModel>();
     final user = context.watch<ProfileViewModel>();
-    final firebaseUser = FirebaseAuth.instance.currentUser;
 
     homeModel.placesNearMe.clear();
     homeModel.bannerImg.clear();

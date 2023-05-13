@@ -1,5 +1,4 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/material.dart';
+//  // import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
 //
 // import '../main_home_page/main_home_page.dart';
@@ -23,8 +22,7 @@
 //   bool showLoading = false;
 //   String verificationFailedMessage = "";
 //   final otpController = TextEditingController();
-//   final FirebaseAuth auth = FirebaseAuth.instance;
-//   String myVerificationId = '';
+//    //   String myVerificationId = '';
 //   bool isTimeOut = false;
 //   @override
 //   void initState() {

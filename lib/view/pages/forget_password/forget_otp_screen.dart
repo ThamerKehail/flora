@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ward/utils/routes.dart';
 import 'package:ward/utils/theme.dart';
@@ -16,7 +15,6 @@ class ForgetOtpScreen extends StatefulWidget {
 }
 
 class _ForgetOtpScreenState extends State<ForgetOtpScreen> {
-  final FirebaseAuth auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     // final defaultPinTheme = PinTheme(
@@ -114,12 +112,6 @@ class _ForgetOtpScreenState extends State<ForgetOtpScreen> {
                             borderRadius: BorderRadius.circular(10))),
                     onPressed: () async {
                       try {
-                        PhoneAuthCredential credential =
-                            PhoneAuthProvider.credential(
-                          verificationId: PhoneRegister.verify,
-                          smsCode: code,
-                        );
-                        await auth.signInWithCredential(credential);
                         Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (_) => const EditPassword()));
                         print("sdfsdf");

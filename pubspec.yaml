@@ -51,8 +51,6 @@ dependencies:
   animated_theme_switcher: ^2.0.6
   image_picker: ^0.8.5+3
   firebase_auth: ^4.3.0
-  google_sign_in: ^5.4.1
-  firebase_core: ^2.5.0
 
 
 

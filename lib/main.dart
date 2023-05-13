@@ -103,7 +103,6 @@ void main() async {
   await getBusinessIdInCart();
 
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
     ChangeNotifierProvider(create: (_) => WishlistViewModel()),
     ChangeNotifierProvider(
         create: (_) => ProductDetailsViewModel(
