@@ -57,7 +57,9 @@ class _CardHistoryWidgetState extends State<CardHistoryWidget> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      widget.orders.name!,
+                      widget.orders.productId == 0
+                          ? '${widget.orders.packegeDetail![0].name!}'
+                          : '${widget.orders.productDetail![0].name!}',
                       maxLines: 1,
                       style: const TextStyle(
                         color: Colors.black,
@@ -69,7 +71,7 @@ class _CardHistoryWidgetState extends State<CardHistoryWidget> {
                       height: 5,
                     ),
                     Text(
-                      "Price: ${widget.orders.singlePrice} JD ",
+                      "Price: ${widget.orders.productId == 0 ? '${widget.orders.packegeDetail![0].price!}' : '${widget.orders.productDetail![0].price!}'} JD ",
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 18,
