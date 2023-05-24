@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:provider/provider.dart';
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/global.dart';
 import 'package:ward/utils/language_constant.dart';
 import 'package:ward/utils/routes.dart';
 import 'package:ward/utils/theme.dart';

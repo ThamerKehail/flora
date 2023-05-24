@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ward/models/package_model.dart';
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/global.dart';
 import 'package:ward/view/pages/bouquet_details/bouquet_view_main.dart';
 
 import '../../../utils/routes.dart';

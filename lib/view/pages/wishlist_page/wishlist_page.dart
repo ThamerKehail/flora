@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ward/models/wishlist_model.dart';
+import 'package:ward/utils/language_constant.dart';
 import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/cart_page/cart_view_model.dart';
-import 'package:ward/view/pages/wishlist_page/wishlist_view_model.dart';
 import 'package:ward/view/widget/wishlist_widget/wishlist_product.dart';
 
 class WishlistPage extends StatefulWidget {
@@ -30,18 +29,11 @@ class _WishlistPageState extends State<WishlistPage> {
             color: Colors.white,
           ),
         ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
-            Spacer(),
-            Text(
-              "Wishlist",
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-            Spacer(),
-          ],
+        title: Text(
+          translation(context).wishlist,
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ),
         centerTitle: true,
         elevation: 3,

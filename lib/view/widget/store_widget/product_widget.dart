@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ward/models/product_model.dart';
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/global.dart';
 import 'package:ward/utils/language_constant.dart';
 import 'package:ward/utils/routes.dart';
 import 'package:ward/utils/theme.dart';
@@ -142,21 +142,23 @@ class _ProductWidgetState extends State<ProductWidget> {
                                         builder: (BuildContext context) =>
                                             AlertDialog(
                                           title:
-                                              const Text('Can\'t Add Product'),
-                                          content: const Text(
-                                              'Cart include product from other business'),
+                                              Text(translation(context).notAdd),
+                                          content: Text(translation(context)
+                                              .includeProduct),
                                           actions: <Widget>[
                                             TextButton(
                                               onPressed: () => Navigator.pop(
                                                   context, 'Cancel'),
-                                              child: const Text('Cancel'),
+                                              child: Text(
+                                                  translation(context).cancel),
                                             ),
                                             TextButton(
                                               onPressed: () {
                                                 Navigator.pop(context, 'OK');
                                                 cart.clear();
                                               },
-                                              child: const Text('Clear Cart'),
+                                              child: Text(translation(context)
+                                                  .clearCart),
                                             ),
                                           ],
                                         ),
@@ -168,7 +170,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                                   ))
                               : IconButton(
                                   onPressed: () {
-                                    snackBar("Product add To cart ");
+                                    snackBar(translation(context).addedToCart);
                                     print("add");
                                     cart.addItem(
                                       productId:
@@ -200,7 +202,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                               ))
                           : IconButton(
                               onPressed: () {
-                                snackBar("Product add To wishlist ");
+                                snackBar(translation(context).addWishlist);
                                 cart.addWishItem(
                                   productId:
                                       widget.product.productId.toString(),

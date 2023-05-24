@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ward/utils/language_constant.dart';
 
 import '../../text_utils.dart';
 
@@ -27,7 +28,7 @@ class _DeliveryContainerWidgetState extends State<DeliveryContainerWidget> {
             name: "Flora App",
             phone: widget.phone,
             value: 1,
-            title: "Cash on Delivery",
+            title: translation(context).cash,
             color: changeColor ? Colors.white : Colors.grey.shade300,
             onChanged: (int? value) {
               setState(() {

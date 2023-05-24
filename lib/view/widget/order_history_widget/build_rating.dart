@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../../../utils/const.dart';
-
 class BuildRating extends StatefulWidget {
   const BuildRating({Key? key}) : super(key: key);
 

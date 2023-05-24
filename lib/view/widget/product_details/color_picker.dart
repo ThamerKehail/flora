@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../utils/const.dart';
+import '../../../utils/global.dart';
 import '../../pages/product_details_page/product_details_view_model.dart';
 
 class ColorPicker extends StatefulWidget {

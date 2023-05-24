@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ward/data/repositories/business_color_repository.dart';
 import 'package:ward/models/business_color_model.dart';
 
-import '../../../utils/const.dart';
+import '../../../utils/global.dart';
 
 class ProductDetailsViewModel extends ChangeNotifier {
   BusinessColorRepository businessColorRepository;

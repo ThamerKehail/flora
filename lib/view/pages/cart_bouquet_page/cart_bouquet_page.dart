@@ -4,8 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ward/utils/language_constant.dart';
 import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/cart_page/cart_view_model.dart';
-import 'package:ward/view/widget/cart_widget/cart_widget.dart';
-import '../../../utils/const.dart';
+
+import '../../../utils/global.dart';
 import '../../widget/cart_widget/cart_bouq_widget.dart';
 import '../../widget/cart_widget/payment/delivery_container_widget.dart';
 import '../../widget/cart_widget/reusable_widget.dart';

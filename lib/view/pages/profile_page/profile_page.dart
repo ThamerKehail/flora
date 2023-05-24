@@ -7,7 +7,7 @@ import 'package:ward/view/pages/profile_page/profile_view_model.dart';
 
 import '../../../main.dart';
 import '../../../models/language.dart';
-import '../../../utils/const.dart';
+import '../../../utils/global.dart';
 import '../../../utils/language_constant.dart';
 import '../../../utils/theme.dart';
 import '../../widget/profile_widget/button_widget.dart';
@@ -37,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
     final user = context.watch<ProfileViewModel>();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile Page'),
+        title: Text(translation(context).profilePage),
         centerTitle: true,
         backgroundColor: mainColor,
         elevation: 0,

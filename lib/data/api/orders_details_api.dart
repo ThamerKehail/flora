@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:ward/utils/const.dart';
 import 'package:ward/utils/routes.dart';
 
 import '../../dio/dio_client.dart';

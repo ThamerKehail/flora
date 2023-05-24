@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:ward/data/repositories/all_places_repository.dart';
 import 'package:ward/models/all_places_banner.dart';
 import 'package:ward/models/all_places_model.dart';
+
 import '../../../data/repositories/all_places_banner_repository.dart';
 import '../../../models/place_details_model.dart';
-import '../../../utils/const.dart';
-import '../../../utils/location_service.dart';
 
 class AllPlacesViewModel extends ChangeNotifier {
   final AllPlacesRepository allPlacesRepository;

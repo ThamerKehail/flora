@@ -2,12 +2,11 @@ import 'package:badges/badges.dart' as badge;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/global.dart';
 import 'package:ward/utils/routes.dart';
 import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/cart_page/cart_view_model.dart';
 import 'package:ward/view/pages/store_page/store_view_model.dart';
-import 'package:ward/view/pages/wishlist_page/wishlist_view_model.dart';
 import 'package:ward/view/widget/store_widget/tabbar_widget.dart';
 
 import '../../../models/avg_business_rate.dart';

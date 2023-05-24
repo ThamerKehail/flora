@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:ward/view/pages/google_info.dart';
 import 'package:ward/view/pages/login_page/login_page.dart';
 import 'package:ward/view/pages/register_screen/register_view_model.dart';
 
@@ -233,8 +232,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   );
                                 }
                               }),
-                          const SizedBox(
-                            height: 20,
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.1,
                           ),
                         ],
                       ),

@@ -2,15 +2,14 @@ import 'package:badges/badges.dart' as badge;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ward/models/flowers_banners.dart';
-import 'package:ward/models/place_details_model.dart';
 import 'package:ward/utils/routes.dart';
 import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/Flower_places_page/Flower_places_view_model.dart';
 import 'package:ward/view/pages/Flower_places_page/search_page/search_page.dart';
 import 'package:ward/view/widget/balloons_widget/balloons_widget.dart';
+
 import '../../../models/all_places_model.dart';
-import '../../../models/places_model.dart';
-import '../../../utils/const.dart';
+import '../../../utils/global.dart';
 import '../../../utils/language_constant.dart';
 import '../../widget/home_widget/carsousel.dart';
 import '../cart_page/cart_view_model.dart';
@@ -32,10 +31,70 @@ class _FlowerPlacesState extends State<FlowerPlaces> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mainColor,
-        title: Text("Flower Places"),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            const Spacer(),
+            Text(translation(context).flowerPlace),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: () =>
+                      Navigator.of(context).pushNamed(AppRoutes.cartScreen),
+                  child: badge.Badge(
+                    badgeStyle: badge.BadgeStyle(
+                      badgeColor: mainColor,
+                    ),
+                    badgeContent: Consumer<CartViewModel>(
+                      builder: (context, value, child) {
+                        return Text(
+                          value.itemCount.toString(),
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
+                        );
+                      },
+                    ),
+                    badgeAnimation: badge.BadgeAnimation.slide(
+                      disappearanceFadeAnimationDuration:
+                          Duration(milliseconds: 300),
+                      // curve: Curves.easeInCubic,
+                    ),
+                    child: const Icon(
+                      Icons.shopping_bag_outlined,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 12,
+                ),
+                IconButton(
+                  onPressed: () {
+                    showSearch(context: context, delegate: SearchPlaces());
+                  },
+                  icon: const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
         centerTitle: true,
         elevation: 0.0,
       ),
+
+      // AppBar(
+      //   backgroundColor: mainColor,
+      //   title: Text("Flower Places"),
+      //   centerTitle: true,
+      //   elevation: 0.0,
+      // ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

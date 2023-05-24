@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:ward/data/api/business_color_api.dart';
 import 'package:ward/data/repositories/business_color_repository.dart';
 import 'package:ward/models/all_places_model.dart';
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/global.dart';
 import 'package:ward/utils/theme.dart';
 
 import '../../../data/api/avg_business_rate.dart';

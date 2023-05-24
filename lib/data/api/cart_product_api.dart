@@ -1,4 +1,4 @@
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/global.dart';
 
 import '../../dio/dio_client.dart';
 import '../../models/cart_product_model.dart';

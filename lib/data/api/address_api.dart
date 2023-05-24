@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/global.dart';
 
 import '../../dio/dio_client.dart';
 

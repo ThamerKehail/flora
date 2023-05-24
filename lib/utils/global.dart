@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/cart_product_model.dart';
-import '../view/pages/home_page/home_view_model.dart';
 
 int userId = 0;
 bool isSetLocation = false;
 String url = "https://www.florajo.com/uploads";
+String oldPass = "";
 
 int? businessIdInCart = 0;
 double distanceKm = 0.0;

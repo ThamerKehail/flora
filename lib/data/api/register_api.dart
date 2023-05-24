@@ -1,14 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ward/models/user_model.dart';
-import 'package:ward/view/pages/google_info.dart';
 import 'package:ward/view/pages/login_page/login_page.dart';
 
 import '../../dio/dio_client.dart';
-import '../../utils/const.dart';
-import '../../utils/routes.dart';
+import '../../utils/global.dart';
 
 class RegisterApi {
   late final DioClient dioClient;

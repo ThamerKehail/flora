@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ward/models/cart_product_model.dart';
 import 'package:ward/view/pages/wishlist_page/wishlist_view_model.dart';
 
-import '../../utils/const.dart';
-import '../../utils/theme.dart';
 import '../widget/cart_widget/cart_widget.dart';
 import 'cart_page/cart_view_model.dart';
 

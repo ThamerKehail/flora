@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:ward/dio/wishlist_db/wishlist_db_helper.dart';
 import 'package:ward/view/pages/wishlist_page/wishlist_view_model.dart';
 
-import '../../../utils/const.dart';
+import '../../../utils/global.dart';
 import '../../pages/cart_page/cart_view_model.dart';
 
 class WishlistProduct extends StatefulWidget {

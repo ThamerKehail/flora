@@ -1,13 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ward/dio/bouquet_db_helper/bouquet_db_helper.dart';
-import 'package:ward/dio/wishlist_db/wishlist_db_helper.dart';
-import 'package:ward/models/wishlist_model.dart';
-import 'package:ward/utils/const.dart';
-import 'package:ward/view/pages/bouquet_details/bouquet_view_main.dart';
+import 'package:ward/utils/global.dart';
 
-import '../../../models/bouquet.dart';
 import '../../../utils/theme.dart';
 import '../../pages/cart_page/cart_view_model.dart';
 import '../full_screen.dart';

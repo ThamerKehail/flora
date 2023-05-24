@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ward/data/repositories/flowers_balloons_places_repository.dart';
 import 'package:ward/models/flowers_balloons_banner_model.dart';
-import 'package:ward/models/flowers_balloons_model.dart';
 
 import '../../../data/repositories/flowers_balloons_banners_repository.dart';
 import '../../../models/all_places_model.dart';
 import '../../../models/place_details_model.dart';
-import '../../../utils/const.dart';
-import '../../../utils/location_service.dart';
 
 class FlowerAndBalloonsPlacesViewModel extends ChangeNotifier {
   final FlowersAndBalloonsPlacesRepository flowersAndBalloonsPlacesRepository;

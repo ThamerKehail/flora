@@ -1,7 +1,7 @@
 import 'package:ward/models/user_model.dart';
 
 import '../../dio/dio_client.dart';
-import '../../utils/const.dart';
+import '../../utils/global.dart';
 
 class UserApi {
   late final DioClient dioClient;

@@ -8,17 +8,19 @@ import 'package:ward/data/repositories/package_repository.dart';
 import 'package:ward/data/repositories/product_repositories.dart';
 import 'package:ward/dio/dio_client.dart';
 import 'package:ward/models/all_places_model.dart';
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/global.dart';
 import 'package:ward/view/pages/bouquet_details/bouquet_view_main.dart';
 import 'package:ward/view/pages/store_page/store_view_model.dart';
+
 import '../../../data/api/avg_business_rate.dart';
 import '../../../data/repositories/avg_business_repository.dart';
+import '../../../utils/language_constant.dart';
 import '../../pages/store_page/store_page.dart';
 import '../../pages/wishlist_page/wishlist_view_model.dart';
 
- class PlacesWidget extends StatelessWidget {
+class PlacesWidget extends StatelessWidget {
   final AllPlaces placesModel;
- const PlacesWidget({Key? key, required this.placesModel}) : super(key: key);
+  const PlacesWidget({Key? key, required this.placesModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +35,9 @@ import '../../pages/wishlist_page/wishlist_view_model.dart';
                   builder: (context) => ChangeNotifierProvider(
                         create: (_) => WishlistViewModel(),
                         child: ChangeNotifierProvider(
-                            create: (_) => BouquetViewModel(BusinessColorRepository(
-                                BusinessColorApi(DioClient()))),
+                            create: (_) => BouquetViewModel(
+                                BusinessColorRepository(
+                                    BusinessColorApi(DioClient()))),
                             child: ChangeNotifierProvider(
                               create: (_) => StoresViewModel(
                                   ProductRepository(ProductApi(DioClient())),
@@ -60,7 +63,7 @@ import '../../pages/wishlist_page/wishlist_view_model.dart';
         },
         child: Container(
           width: double.infinity,
-          height: 220,
+          height: 230,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: Colors.white,
@@ -70,7 +73,9 @@ import '../../pages/wishlist_page/wishlist_view_model.dart';
           child: Stack(
             children: [
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: translation(context).localeName == 'en'
+                    ? CrossAxisAlignment.start
+                    : CrossAxisAlignment.end,
                 children: [
                   Stack(
                     alignment: Alignment.topRight,
@@ -85,67 +90,8 @@ import '../../pages/wishlist_page/wishlist_view_model.dart';
                           ),
                           color: Colors.green,
                           image: DecorationImage(
-                              image: NetworkImage(
-                                  '$url/loge/${placesModel.cover}'),
+                              image: NetworkImage('$url/${placesModel.cover}'),
                               fit: BoxFit.cover),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              width: 100,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Image.asset(
-                                    "assets/images/delivery.png",
-                                    width: 40,
-                                  ),
-                                  const Text(
-                                    '2',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Container(
-                              width: 100,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.yellow,
-                                    size: 30,
-                                  ),
-                                  Text(
-                                    '3.5',
-                                    style: TextStyle(fontSize: 20),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
                         ),
                       ),
                     ],
@@ -156,7 +102,10 @@ import '../../pages/wishlist_page/wishlist_view_model.dart';
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment:
+                          translation(context).localeName == 'en'
+                              ? CrossAxisAlignment.start
+                              : CrossAxisAlignment.end,
                       children: [
                         Text(
                           placesModel.fname!,
@@ -206,7 +155,7 @@ import '../../pages/wishlist_page/wishlist_view_model.dart';
                       borderRadius: BorderRadius.circular(30),
                       image: DecorationImage(
                           image: NetworkImage(
-                        placesModel.profileImage!,
+                        "$url/${placesModel.profileImage!}",
                       ))),
                 ),
               )

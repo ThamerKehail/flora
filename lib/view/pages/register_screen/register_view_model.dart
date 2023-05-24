@@ -59,7 +59,7 @@ class RegisterViewModel extends ChangeNotifier {
     );
   }
 
-  bool visibilityPassword = true;
+  bool visibilityPassword = false;
   void visibilityChange() {
     visibilityPassword = !visibilityPassword;
     notifyListeners();

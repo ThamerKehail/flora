@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:ward/utils/language_constant.dart';
 import 'package:ward/view/pages/edit_password/edit_password_view_model.dart';
 
+import '../../../utils/global.dart';
 import '../../../utils/routes.dart';
 import '../../../utils/theme.dart';
 import '../../widget/profile_widget/button_widget.dart';
@@ -17,13 +18,16 @@ class EditPassword extends StatefulWidget {
 
 class _EditPasswordState extends State<EditPassword> {
   TextEditingController password = TextEditingController();
+  TextEditingController oldPassword = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final editPassword = context.watch<EditPasswordViewModel>();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: mainColor,
         leading: IconButton(
@@ -35,18 +39,11 @@ class _EditPasswordState extends State<EditPassword> {
             color: Colors.white,
           ),
         ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
-            Spacer(),
-            Text(
-              "Edit Password",
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-            Spacer(),
-          ],
+        title: Text(
+          translation(context).editPassword,
+          style: TextStyle(
+            color: Colors.white,
+          ),
         ),
         centerTitle: true,
         elevation: 3,
@@ -58,10 +55,30 @@ class _EditPasswordState extends State<EditPassword> {
           child: Column(
             children: [
               TextFieldWidget(
+                label: translation(context).oldPassword,
+                text: 'Password',
+                controller: oldPassword,
+                onChanged: (name) async {},
+                validator: (value) {
+                  if (value.toString() != oldPass) {
+                    return translation(context).enterRightPass;
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              TextFieldWidget(
                 label: translation(context).newPass,
                 text: 'Password',
                 controller: password,
                 onChanged: (name) {},
+                validator: (value) {
+                  if (value!.isEmpty || value.length < 6) {
+                    return translation(context).enterPassMore;
+                  }
+                },
               ),
               const SizedBox(
                 height: 25,
@@ -78,7 +95,7 @@ class _EditPasswordState extends State<EditPassword> {
                     controller: confirmPassword,
                     validator: (value) {
                       if (confirmPassword.text != password.text) {
-                        return "Please Check Confirm Password";
+                        return translation(context).checkConfirm;
                       }
                     },
                     decoration: InputDecoration(
@@ -96,7 +113,9 @@ class _EditPasswordState extends State<EditPassword> {
               ButtonWidget(
                 text: translation(context).save,
                 onClicked: () {
+                  print(oldPass);
                   if (_formKey.currentState!.validate()) {
+                    print("change Password");
                     editPassword.editPassword(password: password.text);
                     Navigator.of(context).pushNamed(AppRoutes.mainHomeScreen);
                   }

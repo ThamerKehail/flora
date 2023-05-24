@@ -223,10 +223,9 @@
 //   }
 // }
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ward/utils/routes.dart';
+import 'package:ward/utils/language_constant.dart';
 import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/register_screen/otp_screen.dart';
 import 'package:ward/view/pages/register_screen/register_view_model.dart';
@@ -273,14 +272,14 @@ class _PhoneRegisterState extends State<PhoneRegister> {
                   height: 25,
                 ),
                 Text(
-                  "Phone Verification",
+                  translation(context).phoneVerify,
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  "We need to register your phone without getting started!",
+                  translation(context).needRegister,
                   style: TextStyle(
                     fontSize: 16,
                   ),
@@ -389,7 +388,7 @@ class _PhoneRegisterState extends State<PhoneRegister> {
                                       .loading ==
                                   true
                               ? CircularProgressIndicator()
-                              : Text("Send the code")),
+                              : Text(translation(context).sendCode)),
                 ),
               ],
             ),

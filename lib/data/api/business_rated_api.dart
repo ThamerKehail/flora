@@ -1,5 +1,5 @@
 import 'package:ward/models/business_rated_model.dart';
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/global.dart';
 
 import '../../dio/dio_client.dart';
 

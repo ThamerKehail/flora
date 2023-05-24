@@ -8,12 +8,14 @@ import 'package:ward/data/repositories/business_color_repository.dart';
 import 'package:ward/data/repositories/package_repository.dart';
 import 'package:ward/data/repositories/product_repositories.dart';
 import 'package:ward/dio/dio_client.dart';
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/global.dart';
 import 'package:ward/view/pages/bouquet_details/bouquet_view_main.dart';
 import 'package:ward/view/pages/store_page/store_view_model.dart';
+
 import '../../../data/api/avg_business_rate.dart';
 import '../../../data/repositories/avg_business_repository.dart';
 import '../../../models/all_places_model.dart';
+import '../../../utils/language_constant.dart';
 import '../../pages/store_page/store_page.dart';
 import '../../pages/wishlist_page/wishlist_view_model.dart';
 
@@ -63,7 +65,7 @@ class BalloonWidget extends StatelessWidget {
         },
         child: Container(
           width: double.infinity,
-          height: 220,
+          height: 230,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: Colors.white,
@@ -73,7 +75,9 @@ class BalloonWidget extends StatelessWidget {
           child: Stack(
             children: [
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: translation(context).localeName == 'en'
+                    ? CrossAxisAlignment.start
+                    : CrossAxisAlignment.end,
                 children: [
                   Stack(
                     alignment: Alignment.topRight,
@@ -91,71 +95,13 @@ class BalloonWidget extends StatelessWidget {
                         child: CachedNetworkImage(
                           width: 124,
                           height: 124,
-                          imageUrl: '$url/loge/${placesModel.cover}',
+                          imageUrl: '$url/${placesModel.cover}',
                           errorWidget: (BuildContext, String, dynamic) =>
                               Image.asset(
                             "assets/images/flora_cover.png",
                             fit: BoxFit.cover,
                           ),
                           fit: BoxFit.cover,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              width: 100,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Image.asset(
-                                    "assets/images/delivery.png",
-                                    width: 40,
-                                  ),
-                                  const Text(
-                                    '2',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 8,
-                            ),
-                            Container(
-                              width: 100,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(
-                                    Icons.star,
-                                    color: Colors.yellow,
-                                    size: 30,
-                                  ),
-                                  Text(
-                                    '3.5',
-                                    style: TextStyle(fontSize: 20),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
                         ),
                       ),
                     ],
@@ -166,7 +112,10 @@ class BalloonWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment:
+                          translation(context).localeName == 'en'
+                              ? CrossAxisAlignment.start
+                              : CrossAxisAlignment.end,
                       children: [
                         Text(
                           placesModel.fname!,
@@ -218,7 +167,7 @@ class BalloonWidget extends StatelessWidget {
                   child: CachedNetworkImage(
                     width: 124,
                     height: 124,
-                    imageUrl: placesModel.profileImage!,
+                    imageUrl: "$url/${placesModel.profileImage!}",
                     errorWidget: (BuildContext, String, dynamic) => Image.asset(
                       "assets/images/flora_cover.png",
                       fit: BoxFit.cover,

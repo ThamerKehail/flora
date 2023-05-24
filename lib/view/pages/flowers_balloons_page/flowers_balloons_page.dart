@@ -8,7 +8,7 @@ import 'package:ward/view/pages/flowers_balloons_page/search_flowers_balloons_pa
 import 'package:ward/view/widget/balloons_widget/balloons_widget.dart';
 
 import '../../../models/all_places_model.dart';
-import '../../../utils/const.dart';
+import '../../../utils/global.dart';
 import '../../../utils/language_constant.dart';
 import '../../widget/home_widget/carsousel.dart';
 import '../cart_page/cart_view_model.dart';
@@ -51,23 +51,7 @@ class _FlowerAndBalloonsPlacesState extends State<FlowerAndBalloonsPlaces> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             const Spacer(),
-            Column(
-              children: [
-                Text(
-                  translation(context).deliveredTo,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                  ),
-                ),
-                Text(
-                  flowersBalloons.adminArea ?? "",
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                )
-              ],
-            ),
+            Text(translation(context).balloonAndFlowerPlace),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,

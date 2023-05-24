@@ -1,12 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ward/models/cart_model.dart';
 import 'package:ward/view/pages/cart_page/cart_view_model.dart';
 
-import '../../../dio/cart_db/cart_db_helper.dart';
-import '../../../utils/const.dart';
+import '../../../utils/global.dart';
 import '../../../utils/theme.dart';
 
 class CartWidget extends StatefulWidget {

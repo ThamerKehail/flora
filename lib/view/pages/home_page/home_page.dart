@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:ward/models/banner.dart';
 import 'package:ward/models/category_model.dart';
 import 'package:ward/models/home_image.dart';
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/global.dart';
 import 'package:ward/utils/language_constant.dart';
 import 'package:ward/utils/routes.dart';
 import 'package:ward/utils/theme.dart';
@@ -148,9 +148,9 @@ class _HomePageState extends State<HomePage> {
                                     ConnectionState.done) {
                               return CircularProgressIndicator();
                             } else if (snapshot.data!.isEmpty) {
-                              return const Center(
+                              return Center(
                                 child: Text(
-                                  "Welcome To The Flora Application",
+                                  translation(context).welcomeApp,
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,

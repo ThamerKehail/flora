@@ -12,7 +12,7 @@ import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/cart_page/cart_view_model.dart';
 import 'package:ward/view/widget/cart_widget/cart_widget.dart';
 
-import '../../../utils/const.dart';
+import '../../../utils/global.dart';
 import '../../widget/cart_widget/payment/delivery_container_widget.dart';
 import '../../widget/cart_widget/reusable_widget.dart';
 import '../../widget/checkout_widget/text_field.dart';
@@ -105,6 +105,8 @@ class _CartPageState extends State<CartPage> {
       appBar: AppBar(
         backgroundColor: mainColor,
         elevation: 0.0,
+        title: Text(translation(context).cart),
+        centerTitle: true,
       ),
       body: cart.item.isEmpty
           ? Column(
@@ -153,13 +155,18 @@ class _CartPageState extends State<CartPage> {
                                       : cart.currentStep_ != 1
                                           ? ElevatedButton(
                                               onPressed: details.onStepContinue,
-                                              child: const Text("NEXT"),
+                                              child: Text(
+                                                  translation(context).next),
                                             )
                                           : ElevatedButton(
                                               onPressed: cart.currentStep_ == 1
                                                   ? () {
                                                       if (formKey.currentState!
-                                                          .validate()) {
+                                                              .validate() &&
+                                                          cart.pageLoading !=
+                                                              true) {
+                                                        debugPrint(
+                                                            "cart address");
                                                         cart
                                                             .address(
                                                               city: cart
@@ -194,7 +201,15 @@ class _CartPageState extends State<CartPage> {
                                                       }
                                                     }
                                                   : details.onStepContinue,
-                                              child: const Text("NEXT"),
+                                              child: cart.pageLoading == true
+                                                  ? Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color: Colors.white,
+                                                      ),
+                                                    )
+                                                  : Text(translation(context)
+                                                      .next),
                                             ),
                               const SizedBox(
                                 width: 12,
@@ -202,7 +217,7 @@ class _CartPageState extends State<CartPage> {
                               if (cart.currentStep_ != 0)
                                 ElevatedButton(
                                   onPressed: details.onStepCancel,
-                                  child: const Text("BACK"),
+                                  child: Text(translation(context).back),
                                 ),
                             ],
                           ),
@@ -350,9 +365,9 @@ class _CartPageState extends State<CartPage> {
                                                   .width /
                                               2,
                                           height: 25,
-                                          child: const Center(
+                                          child: Center(
                                             child: Text(
-                                              "Delete All Item",
+                                              translation(context).deleteAll,
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
@@ -500,9 +515,9 @@ class _CartPageState extends State<CartPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const TextUtils(
+                                  TextUtils(
                                     fontWeight: FontWeight.bold,
-                                    text: "Shopping to",
+                                    text: translation(context).shopping,
                                     color: Colors.black,
                                     fontSize: 24,
                                   ),
@@ -525,7 +540,7 @@ class _CartPageState extends State<CartPage> {
                                     child: TextUtils(
                                       fontWeight: FontWeight.bold,
                                       text:
-                                          "Total:${cart.totalAmount.toStringAsFixed(2)} JD",
+                                          "${translation(context).total}:${cart.totalAmount.toStringAsFixed(2)} JD",
                                       color: Colors.black,
                                       fontSize: 20,
                                     ),
@@ -536,7 +551,7 @@ class _CartPageState extends State<CartPage> {
                                   ),
 
                                   Center(
-                                    child: cart.pageLoading == true
+                                    child: cart.loadingCart == true
                                         ? CircularProgressIndicator()
                                         : SizedBox(
                                             height: 50,
@@ -551,65 +566,88 @@ class _CartPageState extends State<CartPage> {
                                                                         10)),
                                                     backgroundColor: mainColor,
                                                     elevation: 0),
-                                                onPressed: () async {
-                                                  SharedPreferences prefs =
-                                                      await SharedPreferences
-                                                          .getInstance();
-                                                  cart.item
-                                                      .forEach((key, element) {
-                                                    cart.setLoading(true);
-                                                    cart.cartProduct.add({
-                                                      'order_id':
-                                                          '${prefs.getInt('order_id')}',
-                                                      'business_id':
-                                                          element.businessId,
-                                                      'userID': userId,
-                                                      'payment_method': 2,
-                                                      'product_id':
-                                                          element.productID,
-                                                      'Qty': element.quantity,
-                                                      'single_price':
-                                                          element.productPrice,
-                                                      'total_price': (element
-                                                              .productPrice *
-                                                          element.quantity),
-                                                      'color':
-                                                          '${element.color}',
-                                                      'image': element.image,
-                                                      'name':
-                                                          element.productName,
-                                                      'message':
-                                                          element.message,
-                                                      'type': '1',
-                                                      'package_id': '0',
-                                                    });
-                                                  });
-                                                  print(
-                                                      "==================cart===============");
-                                                  print(
-                                                      cart.cartProduct.length);
-                                                  print(cart.cartProduct);
+                                                onPressed: cart.loadingCart !=
+                                                        true
+                                                    ? () async {
+                                                        SharedPreferences
+                                                            prefs =
+                                                            await SharedPreferences
+                                                                .getInstance();
+                                                        cart.item.forEach(
+                                                            (key, element) {
+                                                          cart.setLoading(true);
+                                                          cart.cartProduct.add({
+                                                            'order_id':
+                                                                '${prefs.getInt('order_id')}',
+                                                            'business_id':
+                                                                element
+                                                                    .businessId,
+                                                            'userID': userId,
+                                                            'payment_method': 2,
+                                                            'product_id':
+                                                                element
+                                                                    .productID,
+                                                            'Qty': element
+                                                                .quantity,
+                                                            'single_price':
+                                                                element
+                                                                    .productPrice,
+                                                            'total_price': (element
+                                                                    .productPrice *
+                                                                element
+                                                                    .quantity),
+                                                            'color':
+                                                                '${element.color}',
+                                                            'image':
+                                                                element.image,
+                                                            'name': element
+                                                                .productName,
+                                                            'message':
+                                                                element.message,
+                                                            'type': '1',
+                                                            'package_id': '0',
+                                                          });
+                                                        });
+                                                        print(
+                                                            "==================cart===============");
+                                                        print(cart.cartProduct
+                                                            .length);
+                                                        print(cart.cartProduct);
 
-                                                  cart.ordersDetails(
-                                                    dataList: cart.cartProduct,
-                                                    context: context,
-                                                  );
-                                                  cart.sendEmail(
-                                                    name: 'Flora App',
-                                                    email:
-                                                        'wardapplication2@gmail.com',
-                                                    toEmail: cart.item.values
-                                                        .first.businessEmail,
-                                                    subject: "New Order",
-                                                    message: "message",
-                                                  );
-                                                },
-                                                child: Text(
-                                                  translation(context).pay,
-                                                  style: const TextStyle(
-                                                      fontSize: 22,
-                                                      color: Colors.white),
-                                                )),
+                                                        cart.ordersDetails(
+                                                          dataList:
+                                                              cart.cartProduct,
+                                                          context: context,
+                                                        );
+                                                        cart.sendEmail(
+                                                          name: 'Flora App',
+                                                          email:
+                                                              'wardapplication2@gmail.com',
+                                                          toEmail: cart
+                                                              .item
+                                                              .values
+                                                              .first
+                                                              .businessEmail,
+                                                          subject: "New Order",
+                                                          message: "message",
+                                                        );
+                                                      }
+                                                    : () {},
+                                                child: cart.loadingCart == true
+                                                    ? Center(
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          color: Colors.white,
+                                                        ),
+                                                      )
+                                                    : Text(
+                                                        translation(context)
+                                                            .pay,
+                                                        style: const TextStyle(
+                                                            fontSize: 22,
+                                                            color:
+                                                                Colors.white),
+                                                      )),
                                           ),
                                   )
                                   // totalWidget(),

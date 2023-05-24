@@ -2,15 +2,13 @@ import 'package:badges/badges.dart' as badge;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ward/models/balloons_banners.dart';
-import 'package:ward/models/place_details_model.dart';
 import 'package:ward/utils/routes.dart';
 import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/ballons_page/balloons_view_model.dart';
 import 'package:ward/view/pages/ballons_page/search_balloons_page/search_balloon_page.dart';
 import 'package:ward/view/widget/balloons_widget/balloons_widget.dart';
+
 import '../../../models/all_places_model.dart';
-import '../../../models/balloons.dart';
-import '../../../utils/const.dart';
 import '../../../utils/language_constant.dart';
 import '../../widget/home_widget/carsousel.dart';
 import '../cart_page/cart_view_model.dart';
@@ -36,24 +34,7 @@ class _BalloonsPlacesState extends State<BalloonsPlaces> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             const Spacer(),
-            Column(
-              children: [
-                Text(
-                  translation(context).deliveredTo,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                  ),
-                ),
-                Text(
-                  balloons.adminArea ?? "",
-                  style: const TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
-                )
-              ],
-            ),
+            Text(translation(context).balloonPlace),
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,

@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:ward/models/business_rated_model.dart';
+import 'package:ward/utils/language_constant.dart';
 
 import '../../../models/all_business_rate.dart';
-import '../../../utils/const.dart';
+import '../../../utils/global.dart';
 import '../../pages/rate_all_business_screen/rate_all_business_view_model.dart';
 
 class CardBusinessWidget extends StatefulWidget {
@@ -74,16 +75,16 @@ class _CardHistoryWidgetState extends State<CardBusinessWidget> {
                               fontSize: 20,
                             ),
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            "Description: ${widget.allBusinessRate.ordersCheack![0].businessDescription}  ",
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                            ),
-                          ),
+                          // const SizedBox(
+                          //   height: 5,
+                          // ),
+                          // Text(
+                          //   "Description: ${widget.allBusinessRate.ordersCheack![0].businessDescription}  ",
+                          //   style: const TextStyle(
+                          //     color: Colors.black,
+                          //     fontSize: 18,
+                          //   ),
+                          // ),
                           const SizedBox(
                             height: 5,
                           ),
@@ -143,10 +144,10 @@ class _CardHistoryWidgetState extends State<CardBusinessWidget> {
                                                     Navigator.pop(context));
                                           },
                                           child: Text(
-                                              "Send Your Rate${widget.allBusinessRate.orderId}")),
+                                              translation(context).sendRate)),
                                 ],
                               )
-                            : Text("Thanks for rating");
+                            : Text(translation(context).thankRate);
                       }),
                 ],
               ),
@@ -189,19 +190,22 @@ class _CardHistoryWidgetState extends State<CardBusinessWidget> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text("Rate This App"),
+              title: Text(translation(context).rate),
               content: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text("Please Rate This Product"),
+                  Text(translation(context).rateProduct),
                   const SizedBox(
                     height: 32,
                   ),
                   buildRating(),
                 ],
               ),
-              actions: [TextButton(onPressed: onTap, child: const Text("OK"))],
+              actions: [
+                TextButton(
+                    onPressed: onTap, child: Text(translation(context).oK))
+              ],
             ));
   }
 

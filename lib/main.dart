@@ -48,7 +48,8 @@ import 'package:ward/data/repositories/register_repository.dart';
 import 'package:ward/data/repositories/send_email_repository.dart';
 import 'package:ward/data/repositories/user_repository.dart';
 import 'package:ward/dio/dio_client.dart';
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/cach_helper.dart';
+import 'package:ward/utils/global.dart';
 import 'package:ward/utils/language_constant.dart';
 import 'package:ward/utils/router.dart';
 import 'package:ward/utils/routes.dart';
@@ -63,7 +64,6 @@ import 'package:ward/view/pages/edit_profile/edit_profile_view_model.dart';
 import 'package:ward/view/pages/flowers_balloons_page/flowers_balloons_view_model.dart';
 import 'package:ward/view/pages/forget_password/forget_password_view_model.dart';
 import 'package:ward/view/pages/home_all_data/home_all_data_view_model.dart';
-import 'package:ward/view/pages/login_page/google_signIn_provider.dart';
 import 'package:ward/view/pages/login_page/login_view_model.dart';
 import 'package:ward/view/pages/main_home_page/main_home_view_model.dart';
 import 'package:ward/view/pages/order_history_page/order_history_view_model.dart';
@@ -93,6 +93,7 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
+  oldPass = await CacheHelper.getData(key: 'password') ?? "";
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

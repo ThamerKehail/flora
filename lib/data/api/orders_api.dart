@@ -1,7 +1,7 @@
 import 'package:ward/models/order_history.dart';
 
 import '../../dio/dio_client.dart';
-import '../../utils/const.dart';
+import '../../utils/global.dart';
 
 class OrdersApi {
   late final DioClient dioClient;

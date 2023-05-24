@@ -1,12 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ward/models/user_model.dart';
 import 'package:ward/utils/routes.dart';
 
 import '../../dio/dio_client.dart';
-import '../../utils/const.dart';
+import '../../utils/global.dart';
 
 class LoginApi {
   late final DioClient dioClient;

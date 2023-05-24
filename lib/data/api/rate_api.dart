@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/global.dart';
 
 import '../../dio/dio_client.dart';
 

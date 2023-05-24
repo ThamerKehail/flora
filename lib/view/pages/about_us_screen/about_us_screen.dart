@@ -29,7 +29,7 @@ class AboutUsScreen extends StatelessWidget {
               height: 15,
             ),
             const Text(
-              "is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+              "The first Jordanian application that brings together the best gift shops, flowers, and balloon arrangements in one place, so that you can enjoy the largest possible number of options, which saves you time and effort in searching for the right gift. thank you for your trust .",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
@@ -60,7 +60,7 @@ class AboutUsScreen extends StatelessWidget {
                         width: 10,
                       ),
                       const Text(
-                        "962 7 9832 7199",
+                        "962 7 9935 0099",
                         style: TextStyle(
                           color: Color(0xff166d5d),
                           fontSize: 22,

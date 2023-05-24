@@ -1,7 +1,7 @@
 //  // import 'package:flutter/material.dart';
 // import 'package:ward/view/pages/login_page/login_page.dart';
 //
-// import '../../utils/const.dart';
+// import '../../utils/global.dart';
 // import 'loggedWidget.dart';
 //
 // class HomeGoogleInfo extends StatelessWidget {

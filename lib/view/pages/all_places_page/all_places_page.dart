@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ward/models/all_places_banner.dart';
 import 'package:ward/models/all_places_model.dart';
-import 'package:ward/models/place_details_model.dart';
 import 'package:ward/utils/routes.dart';
 import 'package:ward/utils/theme.dart';
 import 'package:ward/view/pages/all_places_page/all_places_view_model.dart';
 import 'package:ward/view/pages/all_places_page/search_allPlaces_page/search_allPlaces_page.dart';
 import 'package:ward/view/widget/balloons_widget/balloons_widget.dart';
-import '../../../utils/const.dart';
+
+import '../../../utils/global.dart';
 import '../../../utils/language_constant.dart';
 import '../../widget/home_widget/carsousel.dart';
 import '../cart_page/cart_view_model.dart';
@@ -31,12 +31,60 @@ class _AllPlacesPageState extends State<AllPlacesPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: mainColor,
-        title: Text(
-          "Flora",
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            const Spacer(),
+            Text(translation(context).allPlace),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: () =>
+                      Navigator.of(context).pushNamed(AppRoutes.cartScreen),
+                  child: badge.Badge(
+                    badgeStyle: badge.BadgeStyle(
+                      badgeColor: mainColor,
+                    ),
+                    badgeContent: Consumer<CartViewModel>(
+                      builder: (context, value, child) {
+                        return Text(
+                          value.itemCount.toString(),
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
+                        );
+                      },
+                    ),
+                    badgeAnimation: badge.BadgeAnimation.slide(
+                      disappearanceFadeAnimationDuration:
+                          Duration(milliseconds: 300),
+                      // curve: Curves.easeInCubic,
+                    ),
+                    child: const Icon(
+                      Icons.shopping_bag_outlined,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 12,
+                ),
+                IconButton(
+                  onPressed: () {
+                    showSearch(
+                        context: context, delegate: SearchAllPlacesPlaces());
+                  },
+                  icon: const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                )
+              ],
+            ),
+          ],
         ),
         centerTitle: true,
         elevation: 0.0,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ward/utils/alert_exit_app.dart';
-import 'package:ward/utils/const.dart';
+import 'package:ward/utils/global.dart';
 import 'package:ward/view/pages/main_home_page/main_home_view_model.dart';
 
 import '../../widget/main_home_widget/bottom_nav_bar_widget.dart';

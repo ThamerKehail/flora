@@ -10,7 +10,7 @@
 // import '../../../data/repositories/delete_wishlist_item_repository.dart';
 // import '../../../data/repositories/wishlist_product_repository.dart';
 // import '../../../dio/dio_client.dart';
-// import '../../../utils/const.dart';
+// import '../../../utils/global.dart';
 // import '../../../utils/language_constant.dart';
 // import '../../../utils/routes.dart';
 // import '../../../utils/theme.dart';

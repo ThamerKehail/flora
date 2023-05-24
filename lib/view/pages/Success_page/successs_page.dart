@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:ward/utils/language_constant.dart';
 import 'package:ward/utils/routes.dart';
-import 'package:ward/utils/theme.dart';
 
 import '../cart_page/cart_view_model.dart';
 
@@ -45,7 +45,7 @@ class _SuccessPageState extends State<SuccessPage> {
             height: 20,
           ),
           Text(
-            "Order Successful !",
+            "${translation(context).orderSuccess} !",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
@@ -58,7 +58,7 @@ class _SuccessPageState extends State<SuccessPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
             child: Text(
-              'My friend will contact you to deliver the order',
+              translation(context).contactYou,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
@@ -81,7 +81,7 @@ class _SuccessPageState extends State<SuccessPage> {
               ),
               child: Center(
                 child: Text(
-                  "Home Page",
+                  translation(context).home,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,

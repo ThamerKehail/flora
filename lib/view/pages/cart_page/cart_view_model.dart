@@ -384,7 +384,7 @@ class CartViewModel with ChangeNotifier {
     pageLoading = true;
     notifyListeners();
 
-    addressRepository.address(
+    await addressRepository.address(
       city: city,
       address: address,
       streetName: streetName,
@@ -412,17 +412,18 @@ class CartViewModel with ChangeNotifier {
     );
   }
 
+  bool loadingCart = false;
   Future ordersDetails({
     List? dataList,
     required BuildContext context,
   }) async {
-    pageLoading = true;
+    loadingCart = true;
     notifyListeners();
-    ordersDetailsRepository.ordersDetails(
+    await ordersDetailsRepository.ordersDetails(
       dataList: dataList!,
       context: context,
     );
-    pageLoading = false;
+    loadingCart = false;
     notifyListeners();
   }
 

@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 import '../../dio/dio_client.dart';
-import '../../utils/const.dart';
+import '../../utils/global.dart';
 
 class AddToCartApi {
   late final DioClient dioClient;

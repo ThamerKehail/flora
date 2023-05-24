@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../dio/dio_client.dart';
-import '../../utils/const.dart';
+import '../../utils/global.dart';
 
 class CheckBusinessApi {
   late final DioClient dioClient;
