@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ward/models/package_model.dart';
 import 'package:ward/utils/global.dart';
+import 'package:ward/utils/language_constant.dart';
 import 'package:ward/view/pages/bouquet_details/bouquet_view_main.dart';
 
 import '../../../utils/routes.dart';
@@ -125,21 +126,24 @@ class _BouquetWidgetState extends State<BouquetWidget> {
                                     context: context,
                                     builder: (BuildContext context) =>
                                         AlertDialog(
-                                      title: const Text('Can\'t Add Product'),
-                                      content: const Text(
-                                          'Cart include product from other business'),
+                                      title:
+                                          Text(translation(context).canNotAdd),
+                                      content: Text(
+                                          translation(context).includeProduct),
                                       actions: <Widget>[
                                         TextButton(
                                           onPressed: () =>
                                               Navigator.pop(context, 'Cancel'),
-                                          child: const Text('Cancel'),
+                                          child:
+                                              Text(translation(context).cancel),
                                         ),
                                         TextButton(
                                           onPressed: () {
                                             Navigator.pop(context, 'OK');
                                             cart.clearBouquet();
                                           },
-                                          child: const Text('Clear Cart'),
+                                          child: Text(
+                                              translation(context).clearCart),
                                         ),
                                       ],
                                     ),
@@ -153,7 +157,8 @@ class _BouquetWidgetState extends State<BouquetWidget> {
                               onPressed: () {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text('Product add To Bouquet'),
+                                    content:
+                                        Text(translation(context).addedToCart),
                                     duration: const Duration(seconds: 2),
                                   ),
                                 );

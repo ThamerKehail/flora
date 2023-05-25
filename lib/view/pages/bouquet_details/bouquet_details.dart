@@ -60,7 +60,7 @@ class _BouquetDetailsState extends State<BouquetDetails> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: mainColor,
-          title: const Text("My Bouquet"),
+          title: Text(translation(context).myBoq),
           centerTitle: true,
         ),
         body: bouquet.bouquetList.isEmpty

@@ -107,6 +107,19 @@
   "needRegister":"We need to register your phone without getting started!",
   "sendCode":"Send the code",
   "welcomeApp":"Welcome To The Flora Application",
+  "canNotAdd":"You cannot add the product",
+  "mustLogin":"To add a product, you must log in",
+  "login":"Login",
+  "checkLogin":"Email or Password  not valid or account is not found",
+  "aboutDesc":"The first Jordanian application that brings together the best gift shops, flowers, and balloon arrangements in one place, so that you can enjoy the largest possible number of options, which saves you time and effort in searching for the right gift. thank you for your trust .",
+  "aboutUsAbout": "About Us",
+  "phoneAboutUs": "0799350099",
+  "addNote": "Add Note",
+  "writeNote": "Please write note",
+  "rateStore": "Rate Store",
+  "chooseColorBoq": "Choose the color of your bouquet",
+  "writeMessage": "Do you want to write your message?",
+  "myBoq": "My Bouquet",
 
   "rateBusiness":"Rate Store"
 

@@ -93,26 +93,29 @@ class _ProductWidgetState extends State<ProductWidget> {
                                         context: context,
                                         builder: (BuildContext context) =>
                                             AlertDialog(
-                                          title: const Text(
-                                              'You cannot add the product'),
-                                          content: const Text(
-                                              'To add a product, you must log in'),
+                                          title: Text(
+                                              translation(context).canNotAdd),
+                                          content: Text(
+                                              translation(context).mustLogin),
                                           actions: <Widget>[
                                             TextButton(
                                               onPressed: () => Navigator.pop(
                                                   context, 'Cancel'),
-                                              child: const Text('Cancel'),
+                                              child: Text(
+                                                  translation(context).cancel),
                                             ),
                                             TextButton(
                                               onPressed: () =>
                                                   Navigator.pushNamed(context,
                                                       AppRoutes.loginScreen),
-                                              child: const Text('Login'),
+                                              child: Text(
+                                                  translation(context).login),
                                             ),
                                           ],
                                         ),
                                       )
-                                    : snackBar("Product add To cart ");
+                                    : snackBar(
+                                        translation(context).addedToCart);
                                 userId == 0
                                     ? null
                                     : cart.addItem(

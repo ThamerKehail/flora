@@ -212,10 +212,11 @@ class _LoginPageState extends State<LoginPage> {
                                                 onTap: () {
                                                   Navigator.of(context).pop();
                                                 },
-                                                child: const Text("cancel")),
+                                                child: Text(translation(context)
+                                                    .cancel)),
                                             title: 'Check',
-                                            body: const Text(
-                                              "Email or Password  not valid or account is not found",
+                                            body: Text(
+                                              translation(context).checkLogin,
                                               textAlign: TextAlign.center,
                                             )).show()
                                         : SizedBox();

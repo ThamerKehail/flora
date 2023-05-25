@@ -44,20 +44,30 @@ class _CardHistoryWidgetState extends State<CardBusinessWidget> {
                     height: 90,
                     width: 90,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: CachedNetworkImage(
-                      width: 124,
-                      height: 124,
-                      imageUrl:
-                          "$url/${widget.allBusinessRate.ordersCheack![0].cover}",
-                      errorWidget: (BuildContext, String, dynamic) =>
-                          Image.asset(
-                        "assets/images/flora_cover.png",
-                        fit: BoxFit.cover,
-                      ),
-                      fit: BoxFit.cover,
-                    ),
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            "$url/${widget.allBusinessRate.ordersCheack![0].cover}",
+                          ),
+                          fit: BoxFit.cover,
+                        )
+                        // borderRadius: BorderRadius.circular(15),
+                        ),
+                    // child: CachedNetworkImage(
+                    //   width: 124,
+                    //   height: 124,
+                    //   imageUrl:
+                    //       "$url/${widget.allBusinessRate.ordersCheack![0].cover}",
+                    //   errorWidget: (BuildContext, String, dynamic) =>
+                    //       Image.asset(
+                    //     "assets/images/flora_cover.png",
+                    //     fit: BoxFit.cover,
+                    //   ),
+                    //   fit: BoxFit.cover,
+                    // ),
+                  ),
+                  SizedBox(
+                    width: 10,
                   ),
                   Expanded(
                     child: Padding(
@@ -122,8 +132,8 @@ class _CardHistoryWidgetState extends State<CardBusinessWidget> {
 
                                                 Navigator.pop(context);
                                               }),
-                                          child: const Text(
-                                            "Rate Product",
+                                          child: Text(
+                                            translation(context).rateStore,
                                             style: TextStyle(
                                               fontSize: 15,
                                             ),

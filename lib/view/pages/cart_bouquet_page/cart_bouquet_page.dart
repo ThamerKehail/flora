@@ -91,49 +91,61 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                                       : cart.currentStep_ != 1
                                           ? ElevatedButton(
                                               onPressed: details.onStepContinue,
-                                              child: const Text("NEXT"),
+                                              child: Text(
+                                                  translation(context).next),
                                             )
                                           : ElevatedButton(
                                               onPressed: cart.currentStep_ == 1
                                                   ? () {
                                                       if (formKey.currentState!
                                                           .validate()) {
-                                                        cart
-                                                            .address(
-                                                              city: cart
-                                                                  .city.text,
-                                                              address: cart
-                                                                  .addressText
-                                                                  .text,
-                                                              streetName: cart
-                                                                  .street.text,
-                                                              building:
-                                                                  int.parse(cart
-                                                                      .building
-                                                                      .text),
-                                                              floor: int.parse(
-                                                                  cart.floor
-                                                                      .text),
-                                                              mobile: cart.phone
-                                                                      .text ??
-                                                                  "0785020222",
-                                                              note: cart
-                                                                  .note.text,
-                                                              userId: userId,
-                                                              status: 0,
-                                                              businessId: cart
-                                                                  .bouquetList
-                                                                  .values
-                                                                  .toList()[0]
-                                                                  .businessId,
-                                                            )
-                                                            .whenComplete(() =>
-                                                                details
-                                                                    .onStepContinue!());
+                                                        if (cart.orderAddressFirst ==
+                                                            false) {
+                                                          cart
+                                                              .address(
+                                                                city: cart
+                                                                    .city.text,
+                                                                address: cart
+                                                                    .addressText
+                                                                    .text,
+                                                                streetName: cart
+                                                                    .street
+                                                                    .text,
+                                                                building: int
+                                                                    .parse(cart
+                                                                        .building
+                                                                        .text),
+                                                                floor: int
+                                                                    .parse(cart
+                                                                        .floor
+                                                                        .text),
+                                                                mobile: cart
+                                                                        .phone
+                                                                        .text ??
+                                                                    "0785020222",
+                                                                note: cart
+                                                                    .note.text,
+                                                                userId: userId,
+                                                                status: 0,
+                                                                businessId: cart
+                                                                    .bouquetList
+                                                                    .values
+                                                                    .toList()[0]
+                                                                    .businessId,
+                                                              )
+                                                              .whenComplete(
+                                                                  () => details
+                                                                      .onStepContinue!());
+                                                        } else {
+                                                          debugPrint("Second");
+                                                          details
+                                                              .onStepContinue!();
+                                                        }
                                                       }
                                                     }
                                                   : details.onStepContinue,
-                                              child: const Text("NEXT"),
+                                              child: Text(
+                                                  translation(context).next),
                                             ),
                               const SizedBox(
                                 width: 12,
@@ -141,7 +153,7 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                               if (cart.currentStep_ != 0)
                                 ElevatedButton(
                                   onPressed: details.onStepCancel,
-                                  child: const Text("BACK"),
+                                  child: Text(translation(context).back),
                                 ),
                             ],
                           ),
@@ -348,8 +360,8 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                                     height: 12,
                                   ),
                                   TextFieldWidget(
-                                    hint: "Please write note",
-                                    label: "Add Note",
+                                    hint: translation(context).writeNote,
+                                    label: translation(context).addNote,
                                     textEditingController: cart.note,
                                     textType: TextInputType.text,
                                     validator: (value) {
@@ -374,9 +386,9 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const TextUtils(
+                                  TextUtils(
                                     fontWeight: FontWeight.bold,
-                                    text: "Shopping to",
+                                    text: translation(context).shopping,
                                     color: Colors.black,
                                     fontSize: 24,
                                   ),
@@ -399,7 +411,7 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                                     child: TextUtils(
                                       fontWeight: FontWeight.bold,
                                       text:
-                                          "Total:${cart.totalBouquetAmount.toStringAsFixed(2)} JD",
+                                          "${translation(context).total}:${cart.totalBouquetAmount.toStringAsFixed(2)} JD",
                                       color: Colors.black,
                                       fontSize: 20,
                                     ),

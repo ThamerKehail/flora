@@ -308,6 +308,7 @@ class CartViewModel with ChangeNotifier {
 
   void clear() {
     _item = {};
+    _bouquetList = {};
     notifyListeners();
   }
 
@@ -369,6 +370,14 @@ class CartViewModel with ChangeNotifier {
   }
 
   bool pageLoading = false;
+  bool orderAddressFirst = false;
+
+  changeOrderAddressFirst() {
+    print("changeOrderAddressFirst");
+    orderAddressFirst = false;
+    notifyListeners();
+  }
+
   Future address({
     required String city,
     required String address,
@@ -382,6 +391,7 @@ class CartViewModel with ChangeNotifier {
     required int businessId,
   }) async {
     pageLoading = true;
+    orderAddressFirst = true;
     notifyListeners();
 
     await addressRepository.address(

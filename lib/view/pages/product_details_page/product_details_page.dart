@@ -210,8 +210,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             const SizedBox(
               height: 25,
             ),
-            const Text(
-              "Choose the color of your bouquet",
+            Text(
+              translation(context).chooseColorBoq,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 22,
@@ -265,8 +265,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             const SizedBox(
               height: 12,
             ),
-            const Text(
-              "Do you want to write your message?",
+            Text(
+              translation(context).writeMessage,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 22,
@@ -419,7 +419,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         )
                       : InkWell(
                           onTap: () {
-                            snackBar("Product add To cart ");
+                            snackBar(translation(context).addedToCart);
                             cart.addItem(
                               productId: widget.product.productId.toString(),
                               image: widget.product.productProfileImg,

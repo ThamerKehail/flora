@@ -18,7 +18,7 @@ class LoginViewModel extends ChangeNotifier {
     );
     oldPass = password;
     notifyListeners();
-    await CacheHelper.saveData(key: 'password', value: password);
+    await CacheHelper.saveData(key: 'password', value: password ?? "");
   }
 
   bool visibility = false;

@@ -167,37 +167,47 @@ class _CartPageState extends State<CartPage> {
                                                               true) {
                                                         debugPrint(
                                                             "cart address");
-                                                        cart
-                                                            .address(
-                                                              city: cart
-                                                                  .city.text,
-                                                              address: cart
-                                                                  .addressText
-                                                                  .text,
-                                                              streetName: cart
-                                                                  .street.text,
-                                                              building:
-                                                                  int.parse(cart
-                                                                      .building
-                                                                      .text),
-                                                              floor: int.parse(
-                                                                  cart.floor
-                                                                      .text),
-                                                              mobile: cart.phone
-                                                                      .text ??
-                                                                  "0785020222",
-                                                              note: cart
-                                                                  .note.text,
-                                                              userId: userId,
-                                                              status: 0,
-                                                              businessId: cart
-                                                                  .item.values
-                                                                  .toList()[0]
-                                                                  .businessId,
-                                                            )
-                                                            .whenComplete(() =>
-                                                                details
-                                                                    .onStepContinue!());
+                                                        if (cart.orderAddressFirst ==
+                                                            false) {
+                                                          cart
+                                                              .address(
+                                                                city: cart
+                                                                    .city.text,
+                                                                address: cart
+                                                                    .addressText
+                                                                    .text,
+                                                                streetName: cart
+                                                                    .street
+                                                                    .text,
+                                                                building: int
+                                                                    .parse(cart
+                                                                        .building
+                                                                        .text),
+                                                                floor: int
+                                                                    .parse(cart
+                                                                        .floor
+                                                                        .text),
+                                                                mobile: cart
+                                                                        .phone
+                                                                        .text ??
+                                                                    "0785020222",
+                                                                note: cart
+                                                                    .note.text,
+                                                                userId: userId,
+                                                                status: 0,
+                                                                businessId: cart
+                                                                    .item.values
+                                                                    .toList()[0]
+                                                                    .businessId,
+                                                              )
+                                                              .whenComplete(
+                                                                  () => details
+                                                                      .onStepContinue!());
+                                                        } else {
+                                                          debugPrint('second');
+                                                          details
+                                                              .onStepContinue!();
+                                                        }
                                                       }
                                                     }
                                                   : details.onStepContinue,
@@ -489,8 +499,8 @@ class _CartPageState extends State<CartPage> {
                                     height: 12,
                                   ),
                                   TextFieldWidget(
-                                    hint: "Please write note",
-                                    label: "Add Note",
+                                    hint: translation(context).writeNote,
+                                    label: translation(context).addNote,
                                     textEditingController: cart.note,
                                     textType: TextInputType.text,
                                     validator: (value) {
@@ -552,7 +562,9 @@ class _CartPageState extends State<CartPage> {
 
                                   Center(
                                     child: cart.loadingCart == true
-                                        ? CircularProgressIndicator()
+                                        ? CircularProgressIndicator(
+                                            color: Colors.red,
+                                          )
                                         : SizedBox(
                                             height: 50,
                                             width: 150,
@@ -566,8 +578,8 @@ class _CartPageState extends State<CartPage> {
                                                                         10)),
                                                     backgroundColor: mainColor,
                                                     elevation: 0),
-                                                onPressed: cart.loadingCart !=
-                                                        true
+                                                onPressed: cart.loadingCart ==
+                                                        false
                                                     ? () async {
                                                         SharedPreferences
                                                             prefs =
@@ -614,11 +626,14 @@ class _CartPageState extends State<CartPage> {
                                                             .length);
                                                         print(cart.cartProduct);
 
-                                                        cart.ordersDetails(
-                                                          dataList:
-                                                              cart.cartProduct,
-                                                          context: context,
-                                                        );
+                                                        cart
+                                                            .ordersDetails(
+                                                              dataList: cart
+                                                                  .cartProduct,
+                                                              context: context,
+                                                            )
+                                                            .whenComplete(() =>
+                                                                cart.changeOrderAddressFirst());
                                                         cart.sendEmail(
                                                           name: 'Flora App',
                                                           email:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ward/utils/language_constant.dart';
 import 'package:ward/utils/theme.dart';
 
 class AboutUsScreen extends StatelessWidget {
@@ -7,6 +8,10 @@ class AboutUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(translation(context).aboutUsAbout),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -16,9 +21,9 @@ class AboutUsScreen extends StatelessWidget {
             const SizedBox(
               height: 35,
             ),
-            const Center(
+            Center(
               child: Text(
-                "About Us",
+                translation(context).aboutUsAbout,
                 style: TextStyle(
                   color: Color(0xff166d5d),
                   fontSize: 35,
@@ -28,8 +33,8 @@ class AboutUsScreen extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            const Text(
-              "The first Jordanian application that brings together the best gift shops, flowers, and balloon arrangements in one place, so that you can enjoy the largest possible number of options, which saves you time and effort in searching for the right gift. thank you for your trust .",
+            Text(
+              translation(context).aboutDesc,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
@@ -59,8 +64,8 @@ class AboutUsScreen extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      const Text(
-                        "962 7 9935 0099",
+                      Text(
+                        translation(context).phoneAboutUs,
                         style: TextStyle(
                           color: Color(0xff166d5d),
                           fontSize: 22,
