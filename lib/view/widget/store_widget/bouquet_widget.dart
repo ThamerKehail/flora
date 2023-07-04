@@ -4,6 +4,7 @@ import 'package:ward/models/package_model.dart';
 import 'package:ward/utils/global.dart';
 import 'package:ward/utils/language_constant.dart';
 import 'package:ward/view/pages/bouquet_details/bouquet_view_main.dart';
+import 'package:ward/view/widget/full_screen.dart';
 
 import '../../../utils/routes.dart';
 import '../../../utils/theme.dart';
@@ -269,17 +270,25 @@ class _BouquetWidgetState extends State<BouquetWidget> {
                   //     }),
                 ],
               ),
-              Container(
-                height: 90,
-                width: 90,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.blue,
-                    image: DecorationImage(
-                      image: NetworkImage(
-                          '$url/${widget.package.packageProfileImg}'),
-                      fit: BoxFit.cover,
-                    )),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => DetailScreen(
+                            image: '$url/${widget.package.packageProfileImg}',
+                          )));
+                },
+                child: Container(
+                  height: 90,
+                  width: 90,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.blue,
+                      image: DecorationImage(
+                        image: NetworkImage(
+                            '$url/${widget.package.packageProfileImg}'),
+                        fit: BoxFit.cover,
+                      )),
+                ),
               )
             ],
           ),

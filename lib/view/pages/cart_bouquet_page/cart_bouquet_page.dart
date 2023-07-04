@@ -99,48 +99,8 @@ class _CartBouquetPageState extends State<CartBouquetPage> {
                                                   ? () {
                                                       if (formKey.currentState!
                                                           .validate()) {
-                                                        if (cart.orderAddressFirst ==
-                                                            false) {
-                                                          cart
-                                                              .address(
-                                                                city: cart
-                                                                    .city.text,
-                                                                address: cart
-                                                                    .addressText
-                                                                    .text,
-                                                                streetName: cart
-                                                                    .street
-                                                                    .text,
-                                                                building: int
-                                                                    .parse(cart
-                                                                        .building
-                                                                        .text),
-                                                                floor: int
-                                                                    .parse(cart
-                                                                        .floor
-                                                                        .text),
-                                                                mobile: cart
-                                                                        .phone
-                                                                        .text ??
-                                                                    "0785020222",
-                                                                note: cart
-                                                                    .note.text,
-                                                                userId: userId,
-                                                                status: 0,
-                                                                businessId: cart
-                                                                    .bouquetList
-                                                                    .values
-                                                                    .toList()[0]
-                                                                    .businessId,
-                                                              )
-                                                              .whenComplete(
-                                                                  () => details
-                                                                      .onStepContinue!());
-                                                        } else {
-                                                          debugPrint("Second");
-                                                          details
-                                                              .onStepContinue!();
-                                                        }
+                                                        details
+                                                            .onStepContinue!();
                                                       }
                                                     }
                                                   : details.onStepContinue,
